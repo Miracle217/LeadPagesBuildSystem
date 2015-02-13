@@ -7,9 +7,6 @@ blue='\033[0;34m'
 green='\033[0;32m'
 reset='\033[0m'
 
-echo "SASS or LESS? (1 or SASS, 2 for LESS)"
-read csscompiler
-
 if [ $currentDir != 'LeadPagesBuildSystem' ]; then
 
 
@@ -23,12 +20,6 @@ if [ $currentDir != 'LeadPagesBuildSystem' ]; then
 		git co master && \
 		cp -r ./tmp/leadpages-template ./leadpages-template && \
 		rm -rf ./tmp
-	fi
-
-	if [ $csscompiler == "1" ]; then
-		rm -rf less && rm gulp/tasks/less.js
-	else
-		rm -rf sass && rm gulp/tasks/sass.js
 	fi
 
 	echo "${blue}Installing Build System...${reset}"
