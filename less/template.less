@@ -5,13 +5,13 @@
 /**
  * #SETTINGS
  */
-@import "_settings.colors";
-@import "_settings.global";
+@import "_settings.colors.less";
+@import "_settings.global.less";
 
 /**
  * #Tools
  */
-@import "mixins/css3";
+@import "mixins/css3.less";
 
 /**
  * #Vendor
@@ -26,3 +26,12 @@
 	@import "themes/default/base";
  *
  */
+
+h1{
+	color: red;
+}
+
+div {
+	.opacity(.75);
+	background-color: #efefef;
+}
