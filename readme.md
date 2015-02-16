@@ -61,3 +61,11 @@ Don't have all the stuff you want? You can always fork a branch!
 2. Code
 3. Submit a Pull Request
 4. Thank you for helping out! You're awesome!
+
+##Important notes for the `yeoman` branch
+
+Please note that this branch is meant for using with the [Yeoman generator](https://github.com/LeadPages/LeadPagesYeoman) that MAKE SURE you create a **local yeoman** branch and do a Pull Request *with this branch ONLY*. The difference is that the `yeoman` branch *has* the `leadpages-template` folder and minor readme details like this one.
+
+If you are pulling changes from `master` from other branches (such as updating the gulp tasks), *make sure* you **keep** the `leadpages-template` folder otherwise you'd break the `./install` script on `master`. How? `git co [commit before your merge hash] leadpages-template` to bring it back.
+
+**Best practice:** merge your test changes on a separate branch.
