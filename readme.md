@@ -46,7 +46,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 4. `gulp sass` : Compile SASS files and output to `/leadpages-template/css/` folder
 4. `gulp less` : Compile LESS files and output to `/leadpages-template/css/` folder
 5. `gulp watch` : Watch files, compile SASS, minify html and watch for changes with LiveReload
-	* **Note:** If you are using less, modify `gulp/tasks/watch.js` to use `less` instead of `sass`
+	* **Note:** If you are using less. You can run the watch task with `--less` flag like this: `gulp watch --less`
 6. `gulp zip` : Zip up the `leadpages-template` folder for easy upload!
 
 ##Questions? Issues? Comments?
