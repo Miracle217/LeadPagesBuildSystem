@@ -5,15 +5,14 @@ currentDir=$( echo ${PWD##*/} )
 red='\033[0;31m'
 blue='\033[0;34m'
 green='\033[0;32m'
-NC='\033[0m' # No Color
-#echo -e "${red}Hello Stackoverflow${NC}"
+reset='\033[0m'
 
 if [ $currentDir != 'LeadPagesBuildSystem' ]; then
 
 
 	# New Template. Switch branch to yeoman to copy the skeleton folders and files
 	if [ ! -d "leadpages-template" ]; then
-		echo "${green}No leadpages-template folder found. Getting a skeleton copy.${NC}"
+		echo "${green}No leadpages-template folder found. Getting a skeleton copy.${reset}"
 
 		mkdir tmp && \
 		git checkout yeoman && \
@@ -22,7 +21,8 @@ if [ $currentDir != 'LeadPagesBuildSystem' ]; then
 		cp -r ./tmp/leadpages-template ./leadpages-template && \
 		rm -rf ./tmp
 	fi
-	echo "${blue}Installing Build System...${NC}"
+
+	echo "${blue}Installing Build System...${reset}"
 	npm install
 	rm -rf .git install readme && \
 	echo \n\n"node_modules" >> .gitignore && \
@@ -32,13 +32,13 @@ if [ $currentDir != 'LeadPagesBuildSystem' ]; then
 		git init && git add . && git status
 	fi
 else
-	echo "${blue}Installing Build System...${NC}"
+	echo "${blue}Installing Build System...${reset}"
 	rm -rf .git readme.md install && \
 	cp -r * ../
 	cd ..
 	rm -rf LeadPagesBuildSystem
 
-	echo "${red}Please${NC} ${green}cd ..${NC} ${red}and run${NC} ${green}npm install${NC}"
+	echo "${red}Please${reset} ${green}cd ..${reset} ${red}and run${reset} ${green}npm install${reset}"
 fi
 
-echo "${blue}Done! Happy coding!${NC}"
+echo "${blue}Done! Happy coding!${reset}"
