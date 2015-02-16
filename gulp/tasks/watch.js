@@ -11,8 +11,8 @@ gulp.task('watch', function () {
 
 	//Allow passing in --less flag as an option
 	gulpif(isLESS,
-			gulp.watch(['./less/**/*.less'], ['less']),
-			gulp.watch(['./scss/**/*.scss'], ['sass'])
+			gulp.watch(['./less/**/*.less'], ['less']), //If
+			gulp.watch(['./scss/**/*.scss'], ['sass']) //Else
 	);
 
 	gulp.watch(['./scripts/**/*.js'], ['concat']);
