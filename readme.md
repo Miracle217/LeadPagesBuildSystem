@@ -40,13 +40,13 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 
 ##Available Gulp Tasks
 
-1. `gulp` (default) : `connect` & `watch`
-2. `gulp concat` : Concatenate files
-3. `gulp html` : Minify html & watch with LiveReload
-4. `gulp sass` : Compile SASS files and output to `/leadpages-template/css/` folder
-4. `gulp less` : Compile LESS files and output to `/leadpages-template/css/` folder
-5. `gulp watch` : Watch files, compile SASS, minify html and watch for changes with LiveReload
-	* **Note:** If you are using less. You can run the watch task with the `--less` flag like this: `gulp watch --less` OR modify the `watch.js`.
+1. `gulp` (default) : `connect`, `open` (the default browser), `watch`
+2. `gulp concat` : Concatenate JS files inside `leadpages-template/js/*.js` and wrap them with jQuery `docready` and `window.load`.
+3. `gulp html` : Minify `index.html` & `liveReload` if there are changes
+4. `gulp sass` : Compile & minify SASS files from `/scss/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
+4. `gulp less` : Compile & minify LESS files from `/less/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
+5. `gulp watch` : Watch changes on html, SASS/Less, minify html and watch for changes with `LiveReload`, as well as `zip` up `leadpages-template.zip`.
+   * **Note:** The `watch` task watches changes from both the `scss` and `less` folders. Obviously, you don't need both SASS & Less, just delete one of folders. The task will ignore the one that doesn't exist.
 6. `gulp zip` : Zip up the `leadpages-template` folder for easy upload!
 
 ##Questions? Issues? Comments?
