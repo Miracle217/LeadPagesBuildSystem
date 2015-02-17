@@ -4,7 +4,7 @@
   "description": "Build System to automate workflow for LeadPages template creation",
   "main": "gulpfile.js",
   "scripts": {
-    "stop": "gulp help"
+    "instal": "gulp help"
   },
   "repository": {
     "type": "git",
