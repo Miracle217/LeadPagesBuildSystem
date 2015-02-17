@@ -1,7 +1,7 @@
-var gulp = require('gulp'),
-	open = require('gulp-open');
+var gulp = require('gulp-help')(require('gulp'));
+var open = require('gulp-open');
 
-gulp.task('open', function(){
+gulp.task('open', 'Launch the default browser', function(){
 	var opts = {
 		url: 'http://localhost:8080',
 		app: 'google chrome'

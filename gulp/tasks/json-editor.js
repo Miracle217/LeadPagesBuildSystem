@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+var gulp = require('gulp-help')(require('gulp'));
 var jeditor = require("gulp-json-editor");
 
 var incrementMinorVer = function (ver) {
@@ -18,8 +18,7 @@ var incrementNotes = function (notes, oldVersion, newVersion) {
 		notes += " " + newVersion;
 };
 
-gulp.task('edit-json', function () {
-	console.log("ALL THE THINGS");	
+gulp.task('edit-json', 'Auto-increment the version in `/leadpages-template/meta/template.json`', function () {
 	gulp.src("./leadpages-template/meta/template.json")
 		.pipe(jeditor(function (json) {
 			var cachedVersion = json.version;
@@ -27,6 +26,6 @@ gulp.task('edit-json', function () {
 			json.notes = incrementNotes(json.notes, cachedVersion, json.version);
 			return json;
 		}))
-		// this will throw EEXIST error. 
+		// this will throw EEXIST error.
 		.pipe(gulp.dest("./leadpages-template/meta/template.json"));
 });

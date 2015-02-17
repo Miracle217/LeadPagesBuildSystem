@@ -1,7 +1,7 @@
-var gulp = require('gulp'),
-  connect = require('gulp-connect');
+var gulp = require('gulp-help')(require('gulp'));
+var connect = require('gulp-connect');
 
-gulp.task('connect', function() {
+gulp.task('connect', 'Connect LiveReload', function() {
   connect.server({
     root: 'leadpages-template',
     livereload: true
