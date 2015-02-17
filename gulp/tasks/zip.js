@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+var gulp = require('gulp-help')(require('gulp'));
 var plumber = require('gulp-plumber');
 var zip = require('gulp-zip');
 
@@ -8,7 +8,7 @@ var tjson = require('../../leadpages-template/meta/template.json');
 
 var paths = ['./leadpages-template/**/*'];
 
-gulp.task('zip', function () {
+gulp.task('zip', 'Zip up the `leadpages-template` folder', function () {
 	var fileName = 'leadpages-template ' + tjson.version + '.zip';
 	var leadPagesTemplateName = './leadpages-template.zip';
 
@@ -22,7 +22,7 @@ gulp.task('zip', function () {
 			}
 		});
 	}
-	
+
 	// if leadpages-template.zip exists, copy it to leadpages-template {{version}}.zip, and delete leadpages-template.zip
 	if(fs.existsSync(leadPagesTemplateName)) {
 		exec('cp -R leadpages-template.zip "' + fileName + '"', function (err) {
