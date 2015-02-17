@@ -1,9 +1,9 @@
-var gulp = require('gulp');
+var gulp = require('gulp-help')(require('gulp'));
 var connect = require('gulp-connect');
 var concat = require('gulp-concat');
 var handleErrors = require('../util/handleErrors');
 
-gulp.task('concat', function () {
+gulp.task('concat', 'Concatenate `js/*.js` files and wrap with `docready` and `window.load`', function () {
 
 	gulp.src(['./scripts/vendor/**/*.js'])
 		.pipe(concat('vendor.js'))

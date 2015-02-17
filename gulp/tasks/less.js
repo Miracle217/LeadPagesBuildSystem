@@ -1,10 +1,10 @@
-var gulp = require('gulp');
+var gulp = require('gulp-help')(require('gulp'));
 var less = require('gulp-less');
 var concat = require('gulp-concat');
 var connect = require('gulp-connect');
 var handleErrors = require('../util/handleErrors');
 
-gulp.task('less', function () {
+gulp.task('less', 'Watch changes in the `less` folder and compile to `leadpages-template/css/style.css`', function () {
   gulp.src('./less/template.less')
 		.pipe(less())
     	.on('error', handleErrors)
