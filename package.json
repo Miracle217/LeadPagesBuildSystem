@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Build System to automate workflow for LeadPages template creation",
   "main": "gulpfile.js",
-  "scripts": {},
+  "scripts": {
+    "postinstall": "gulp help"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/scottsilvi/LeadPagesBuildSystem.git"
