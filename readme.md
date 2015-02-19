@@ -40,14 +40,55 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 
 ##Available Gulp Tasks
 
+1. `gulp help` : Show available gulp tasks
 1. `gulp` (default) : `connect`, `open` (the default browser), `watch`
 2. `gulp concat` : Concatenate JS files inside `leadpages-template/js/*.js` and wrap them with jQuery `docready` and `window.load`.
-3. `gulp html` : Minify `index.html` & `liveReload` if there are changes
+3. `gulp html` : `LiveReload` the `index.html` if there are changes
 4. `gulp sass` : Compile & minify SASS files from `/scss/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
 4. `gulp less` : Compile & minify LESS files from `/less/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
-5. `gulp watch` : Watch changes on html, SASS/Less, minify html and watch for changes with `LiveReload`, as well as `zip` up `leadpages-template.zip`.
+5. `gulp watch` : Watch changes on html, SASS/Less, and watch for changes with `LiveReload`, as well as `zip` up `leadpages-template.zip`.
    * **Note:** The `watch` task watches changes from both the `scss` and `less` folders. Obviously, you don't need both SASS & Less, just delete one of folders. The task will ignore the one that doesn't exist.
-6. `gulp zip` : Zip up the `leadpages-template` folder for easy upload!
+6. `gulp zip` : Zip up the `leadpages-template` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json` if you uploading updates.)
+
+##Folders Structure Notes
+
+````
+| --- gulp
+| --- gulfile.js
+| --- leadpages-template/
+|     | --- css/
+|     | 	| --- style.css (Compiled from either the "scss" or "less" folder)
+|     | --- fonts/
+|     | --- img/
+|     | --- js/
+|     | 	| --- html5shiv.js (required by LeadPages)
+|     | 	| --- functions.js (output from the "scripts" except the "vendor" folder)
+|     | 	| --- vendor.js (output from the "scripts/vendor" folder)
+|     | --- meta/
+|     | 	| --- template.json
+| --- less (You can delete this if you prefer less)
+| 	  | --- _settings.colors.less
+|	  | --- _settings.global.less (variables for fonts etc...)
+|	  | --- mixins/
+|	  | 	| --- css3.less (Examples of mixins)
+|	  | --- template.less (Put your custom css here or import others in here.)
+| --- node_modules (Node modules for the build system. This folder should be ignore in a repository)
+| --- package.json (Dependencies for the build system)
+| --- scripts/ (JS within this folder will output to `leadpages-template/js/functions.js`)
+|	  | --- app/ (All JS within this folder will output to `leadpages-template/js/functions.js`)
+|     | --- vendor/ (JS within this folder will output to `leadpages-template/js/vendor.js`)
+|     |     | --- jquery.1.9.1.min.js (And other 3rd party scripts)
+| --- scss/ (You can delete this if you prefer less)
+| 	  | --- _settings.colors.scss
+|	  | --- _settings.global.scss (variables for fonts etc...)
+|	  | --- mixins/
+|	  | 	| --- css3.scss (Examples of mixins)
+|	  | --- template.scss (Put your custom css here or import others in here.)
+````
+
+###Important note on `leadpages-template/css/style.css`
+
+If you have a `style.css` in `leadpages-template/css` already, you might want to rename it to something else because if you use `gulp sass` or `gulp less` this file **will be overwritten**!
 
 ##Questions? Issues? Comments?
 
