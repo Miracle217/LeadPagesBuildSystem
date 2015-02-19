@@ -61,7 +61,11 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 |     | --- fonts/
 |     | --- img/
 |     | --- js/
-|     | 	| --- functions.js (output from the "scripts" folder)
+|     | 	| --- html5shiv.js (required by LeadPages)
+|     | 	| --- functions.js (output from the "scripts" except the "vendor" folder)
+|     | 	| --- vendor.js (output from the "scripts/vendor" folder)
+|     | --- meta/
+|     | 	| --- template.json
 | --- less (You can delete this if you prefer less)
 | 	  | --- _settings.colors.less
 |	  | --- _settings.global.less (variables for fonts etc...)
@@ -73,7 +77,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 | --- scripts/ (JS within this folder will output to `leadpages-template/js/functions.js`)
 |	  | --- app/ (All JS within this folder will output to `leadpages-template/js/functions.js`)
 |     | --- vendor/ (JS within this folder will output to `leadpages-template/js/vendor.js`)
-|     |     | --- (Such as jQuery or other 3rd party scripts)
+|     |     | --- jquery.1.9.1.min.js (And other 3rd party scripts)
 | --- scss/ (You can delete this if you prefer less)
 | 	  | --- _settings.colors.scss
 |	  | --- _settings.global.scss (variables for fonts etc...)
