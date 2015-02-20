@@ -9,4 +9,6 @@ gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload
 	gulp.watch(['./scss/**/*.scss'], ['sass']);
 
 	gulp.watch(['./scripts/**/*.js'], ['concat']);
+
+	gulp.watch(['./leadpages-template/meta/template.json'], ['zip']);
 });
