@@ -3,7 +3,7 @@ var connect = require('gulp-connect');
 var concat = require('gulp-concat');
 var handleErrors = require('../util/handleErrors');
 
-gulp.task('concat', 'Concatenate js files into vendor.js and functions.js', function () {
+gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and functions.js', function () {
 
 	gulp.src(['./scripts/vendor/**/*.js'])
 		.pipe(concat('vendor.js'))
