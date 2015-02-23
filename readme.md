@@ -53,6 +53,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 ##Folders Structure Notes
 
 ````
+Your Template Folder
 | --- gulp
 | --- gulfile.js
 | --- leadpages-template/
@@ -62,28 +63,33 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 |     | --- img/
 |     | --- js/
 |     | 	| --- html5shiv.js (required by LeadPages)
-|     | 	| --- functions.js (output from the "scripts" except the "vendor" folder)
+|     | 	| --- functions.js (output from the "scripts/app" folder)
 |     | 	| --- vendor.js (output from the "scripts/vendor" folder)
 |     | --- meta/
 |     | 	| --- template.json
 | --- less (You can delete this if you prefer less)
-| 	  | --- _settings.colors.less
+| 	  | --- _settings.colors.less (Base colors: font colors, background etc...)
 |	  | --- _settings.global.less (variables for fonts etc...)
 |	  | --- mixins/
-|	  | 	| --- css3.less (Examples of mixins)
+|	  | 	| --- css3.less (Mixins examples)
 |	  | --- template.less (Put your custom css here or import others in here.)
-| --- node_modules (Node modules for the build system. This folder should be ignore in a repository)
-| --- package.json (Dependencies for the build system)
-| --- scripts/ (JS within this folder will output to `leadpages-template/js/functions.js`)
-|	  | --- app/ (All JS within this folder will output to `leadpages-template/js/functions.js`)
-|     | --- vendor/ (JS within this folder will output to `leadpages-template/js/vendor.js`)
+|     | --- vendor/ (Put plugins css in here such as bootstrap.min.css/scss. output as vendor.css)
+| --- node_modules
+| --- package.json
+| --- scripts/
+|	  | --- app/ (JS in here will output to `leadpages-template/js/functions.js`)
+|	  |	    | --- something.js
+|     | --- vendor/ (JS in here will output to `leadpages-template/js/vendor.js`)
 |     |     | --- jquery.1.9.1.min.js (And other 3rd party scripts)
+| --- scripts-footer.js (Do not remove! Use for wrapping `function.js`)
+| --- scripts-header.js (Do not remove! Use for wrapping `function.js`)
 | --- scss/ (You can delete this if you prefer less)
-| 	  | --- _settings.colors.scss
+| 	  | --- _settings.colors.scss (Base colors: font colors, background etc...)
 |	  | --- _settings.global.scss (variables for fonts etc...)
 |	  | --- mixins/
-|	  | 	| --- css3.scss (Examples of mixins)
+|	  | 	| --- css3.scss (Mixins examples)
 |	  | --- template.scss (Put your custom css here or import others in here.)
+|     | --- vendor/ (Put plugins css in here such as bootstrap.min.css/scss. output as vendor.css)
 ````
 
 ###Important note on `leadpages-template/css/style.css`
