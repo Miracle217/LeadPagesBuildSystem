@@ -24,9 +24,7 @@ if [ $currentDir != 'LeadPagesBuildSystem' ]; then
 
 	echo "${blue}Installing Build System...${reset}"
 	npm install
-	rm -rf .git install readme && \
-	echo \n\n"node_modules" >> .gitignore && \
-	echo \n\n".DS_Store" >> .gitignore
+	rm -rf .git install readme
 
 	if [ ! -d ".git" ]; then
 		git init && git add . && git status

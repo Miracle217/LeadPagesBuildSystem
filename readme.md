@@ -44,15 +44,19 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 1. `gulp` (default) : `connect`, `open` (the default browser), `watch`
 2. `gulp concat` : Concatenate JS files inside `leadpages-template/js/*.js` and wrap them with jQuery `docready` and `window.load`.
 3. `gulp html` : `LiveReload` the `index.html` if there are changes
+4. `gulp jshint`: Run JSHint on JS files
+5. `gulp jsonlint`: Lint template.json
 4. `gulp sass` : Compile & minify SASS files from `/scss/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
 4. `gulp less` : Compile & minify LESS files from `/less/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
-5. `gulp watch` : Watch changes on html, SASS/Less and `LiveReload`, as well as `zip` up `leadpages-template.zip` if changes are detected in `/meta/template.json`.
+4. `gulp vendorcss`: Compile `leadpages-template/css/vendor.css` from scss/less -> vendor/*.css/scss
+5. `gulp watch` : Watch changes on html, SASS/Less and `LiveReload`, `lint` JS & template.json, as well as `zip` up `leadpages-template.zip` if changes are detected in `/meta/template.json`.
    * **Note:** The `watch` task watches changes from both the `scss` and `less` folders. Obviously, you don't need both SASS & Less, just delete one of folders. The task will ignore the one that doesn't exist.
 6. `gulp zip` : Zip up the `leadpages-template` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json` if you uploading updates.)
 
 ##Folders Structure Notes
 
 ````
+Your Template Folder
 | --- gulp
 | --- gulfile.js
 | --- leadpages-template/
@@ -62,28 +66,33 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 |     | --- img/
 |     | --- js/
 |     | 	| --- html5shiv.js (required by LeadPages)
-|     | 	| --- functions.js (output from the "scripts" except the "vendor" folder)
+|     | 	| --- functions.js (output from the "scripts/app" folder)
 |     | 	| --- vendor.js (output from the "scripts/vendor" folder)
 |     | --- meta/
 |     | 	| --- template.json
 | --- less (You can delete this if you prefer less)
-| 	  | --- _settings.colors.less
+| 	  | --- _settings.colors.less (Base colors: font colors, background etc...)
 |	  | --- _settings.global.less (variables for fonts etc...)
 |	  | --- mixins/
-|	  | 	| --- css3.less (Examples of mixins)
+|	  | 	| --- css3.less (Mixins examples)
 |	  | --- template.less (Put your custom css here or import others in here.)
-| --- node_modules (Node modules for the build system. This folder should be ignore in a repository)
-| --- package.json (Dependencies for the build system)
-| --- scripts/ (JS within this folder will output to `leadpages-template/js/functions.js`)
-|	  | --- app/ (All JS within this folder will output to `leadpages-template/js/functions.js`)
-|     | --- vendor/ (JS within this folder will output to `leadpages-template/js/vendor.js`)
+|     | --- vendor/ (Put plugins css in here such as bootstrap.min.css/scss. output as vendor.css)
+| --- node_modules
+| --- package.json
+| --- scripts/
+|	  | --- app/ (JS in here will output to `leadpages-template/js/functions.js`)
+|	  |	    | --- something.js
+|     | --- vendor/ (JS in here will output to `leadpages-template/js/vendor.js`)
 |     |     | --- jquery.1.9.1.min.js (And other 3rd party scripts)
+| --- scripts-footer.js (Do not remove! Use for wrapping `function.js`)
+| --- scripts-header.js (Do not remove! Use for wrapping `function.js`)
 | --- scss/ (You can delete this if you prefer less)
-| 	  | --- _settings.colors.scss
+| 	  | --- _settings.colors.scss (Base colors: font colors, background etc...)
 |	  | --- _settings.global.scss (variables for fonts etc...)
 |	  | --- mixins/
-|	  | 	| --- css3.scss (Examples of mixins)
+|	  | 	| --- css3.scss (Mixins examples)
 |	  | --- template.scss (Put your custom css here or import others in here.)
+|     | --- vendor/ (Put plugins css in here such as bootstrap.min.css/scss. output as vendor.css)
 ````
 
 ###Important note on `leadpages-template/css/style.css`
