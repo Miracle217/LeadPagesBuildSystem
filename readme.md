@@ -40,8 +40,8 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 
 ##Available Gulp Tasks
 
-1. `gulp help` : Show available gulp tasks
-1. `gulp` (default) : `connect`, `open` (the default browser), `watch`
+1. `gulp` or `gulp help` : Show available gulp tasks
+1. `gulp start` : `connect`, `open` (the default browser), `watch`
 2. `gulp concat` : Concatenate JS files inside `leadpages-template/js/*.js` and wrap them with jQuery `docready` and `window.load`.
 3. `gulp html` : `LiveReload` the `index.html` if there are changes
 4. `gulp jshint`: Run JSHint on JS files
