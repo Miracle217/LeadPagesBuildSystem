@@ -5,7 +5,8 @@ var connect = require('gulp-connect');
 var handleErrors = require('../util/handleErrors');
 
 gulp.task('less', 'Watch changes in the `less` folder and compile to `leadpages-template/css/style.css`', function () {
-  gulp.src('./less/template.less')
+
+  	gulp.src('./less/template.less')
 		.pipe(less())
     	.on('error', handleErrors)
 		.pipe(concat('style.css'))
