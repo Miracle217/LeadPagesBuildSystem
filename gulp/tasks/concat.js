@@ -2,7 +2,10 @@ var gulp = require('gulp-help')(require('gulp'));
 var connect = require('gulp-connect');
 var concat = require('gulp-concat');
 var handleErrors = require('../util/handleErrors');
-var logger = require('gulp-logger');
+var debug = require('gulp-logger');
+var yargs = require('yargs').argv;
+var gulpif = require('gulp-if');
+var uglify = require('gulp-uglify');
 
 gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and functions.js', function () {
 
@@ -19,7 +22,7 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 			})
 		)
 		.pipe(concat('vendor.js'))
-    	.on('error', handleErrors)
+    		.on('error', handleErrors)
 		.pipe(gulp.dest('./leadpages-template/js'))
 		.pipe(connect.reload());
 
@@ -36,7 +39,8 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 			})
 		)
 		.pipe(concat('functions.js'))
-    	.on('error', handleErrors)
+    		.pipe(gulpif( yargs.min, uglify() ))
+    		.on('error', handleErrors)
 		.pipe(gulp.dest('./leadpages-template/js'))
 		.pipe(connect.reload());
 });
