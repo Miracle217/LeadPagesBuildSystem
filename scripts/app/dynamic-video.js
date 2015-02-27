@@ -1,0 +1,1 @@
+$('.video-player').attr('src', leadpages_input_data.videourl);

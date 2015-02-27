@@ -23,7 +23,7 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 		.pipe(gulp.dest('./leadpages-template/js'))
 		.pipe(connect.reload());
 
-	gulp.src([,'./scripts/scripts-header.js','./scripts/app/**/!(scripts-footer)*.js','./scripts/scripts-footer.js'])
+	gulp.src(['./scripts/global.js','./scripts/scripts-header.js','./scripts/scripts-footer.js'])
 		.pipe(
 			debug({
 				before: 'Compiling function.js',
