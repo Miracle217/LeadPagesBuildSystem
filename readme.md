@@ -42,7 +42,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 
 1. `gulp` or `gulp help` : Show available gulp tasks
 1. `gulp start` : `connect`, `open` (the default browser), `watch`
-2. `gulp concat` : Concatenate JS files inside `leadpages-template/js/*.js` and wrap them with jQuery `docready` and `window.load`.
+2. `gulp concat` : Compile `functions.js` from `scripts/app/*.js` and wrap them with jQuery `docready` and `window.load`, and compile `vendor.js` from `scripts/vendor/**/*.js` (jquery-1.9.1.min.js is always included first, you can also delete it if you don't want jQuery)
 3. `gulp html` : `LiveReload` the `index.html` if there are changes
 4. `gulp lint`: Run JSHint on all JS files and lint `meta/template.json`
 4. `gulp sass` : Compile & minify SASS files from `/scss/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
@@ -75,7 +75,6 @@ Your Template Folder
 |	  | --- mixins/
 |	  | 	| --- css3.less (Mixins examples)
 |	  | --- template.less (Put your custom css here or import others in here.)
-|     | --- vendor/ (Put plugins css in here such as bootstrap.min.css/scss. output as vendor.css)
 | --- node_modules
 | --- package.json
 | --- scripts/
@@ -92,7 +91,6 @@ Your Template Folder
 |	  | --- mixins/
 |	  | 	| --- css3.scss (Mixins examples)
 |	  | --- template.scss (Put your custom css here or import others in here.)
-|     | --- vendor/ (Put plugins css in here such as bootstrap.min.css/scss. output as vendor.css)
 ````
 
 ###Important note on `leadpages-template/css/style.css`
