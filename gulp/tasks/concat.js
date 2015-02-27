@@ -6,7 +6,7 @@ var logger = require('gulp-logger');
 
 gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and functions.js', function () {
 
-	gulp.src(['./scripts/vendor/**/*.js'])
+	gulp.src(['./scripts/vendor/jquery-1.9.1.min.js','./scripts/vendor/**/*.js'])
 		.pipe(
 			debug({
 				before: 'Compiling vendor.js',
