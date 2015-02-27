@@ -82,6 +82,7 @@ Your Template Folder
 |	  |	    | --- something.js
 |     | --- vendor/ (JS in here will output to `leadpages-template/js/vendor.js`)
 |     |     | --- jquery.1.9.1.min.js (And other 3rd party scripts)
+| --- global.js (Global scripts or anything that needs to be outside of the jquery wrappers, such as `var leadpages_input_data` or `var requestedHeight`)
 | --- scripts-footer.js (Do not remove! Use for wrapping `function.js`)
 | --- scripts-header.js (Do not remove! Use for wrapping `function.js`)
 | --- scss/ (You can delete this if you prefer less)
