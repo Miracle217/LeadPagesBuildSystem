@@ -23,6 +23,7 @@ If you are starting fresh, try our [yeoman generator](https://github.com/LeadPag
 2. `git clone https://github.com/LeadPages/LeadPagesBuildSystem .` (The **.** at the end is important!)
  * Or download a [zip file here](https://github.com/LeadPages/LeadPagesBuildSystem/archive/master.zip) and unzip to **outside** of `leadpages-template` folder
 3. In the terminal, run `./install`
+4. `gulp start` to begin
 5. Done!
 
 ### Existing Template *with* Git
@@ -46,7 +47,11 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 3. `gulp html` : `LiveReload` the `index.html` if there are changes
 4. `gulp lint`: Run JSHint on all JS files and lint `meta/template.json`
 4. `gulp sass` : Compile & minify SASS files from `/scss/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
+	* `gulp sass --min` : Minify `style.css`
+	* `gulp sass --nc` : Strip CSS comments out of `style.css`
 4. `gulp less` : Compile & minify LESS files from `/less/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
+	* `gulp sass --min` : Minify `style.css`
+	* `gulp sass --nc` : Strip CSS comments out of `style.css`
 4. `gulp vendorcss`: Put vendor's **CSS** in here. Compile to `leadpages-template/css/vendor.css` from scss/less -> vendor/*.css. If you use vendor less/scss, recommend importing them into template.scss/less which gives you a lot more control over what's being compile first.
 5. `gulp watch` : Watch changes on html, SASS/Less and `LiveReload`, `lint` JS & template.json, as well as `zip` up `leadpages-template.zip` if changes are detected in `/meta/template.json`.
    * **Note:** The `watch` task watches changes from both the `scss` and `less` folders. Obviously, you don't need both SASS & Less, just delete one of folders. The task will ignore the one that doesn't exist.
