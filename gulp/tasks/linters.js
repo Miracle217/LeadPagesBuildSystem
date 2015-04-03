@@ -5,7 +5,7 @@ var jsonlint = require('gulp-jsonlint')
 var debug = require('gulp-debug');
 
 gulp.task('lint', 'Lint JS files', function(){
-	gulp.src('./scripts/app/*.js')
+	gulp.src('./build/js/src/*.js')
 		.pipe(debug({title: 'Linting: '}))
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish))
