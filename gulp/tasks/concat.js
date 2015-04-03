@@ -2,14 +2,14 @@ var gulp = require('gulp-help')(require('gulp'));
 var connect = require('gulp-connect');
 var concat = require('gulp-concat');
 var handleErrors = require('../util/handleErrors');
-var debug = require('gulp-logger');
+var debug = require('gulp-debug');
 var yargs = require('yargs').argv;
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 
 gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and functions.js', function () {
 
-	gulp.src(['./scripts/vendor/jquery-1.9.1.min.js','./scripts/vendor/**/*.js'])
+	gulp.src(['./scripts/vendor/**/*.js'])
 		.pipe(
 			debug({
 				before: 'Compiling vendor.js',
@@ -17,7 +17,7 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 				basename: 'vendor',
 				extname: '.js',
 				display: 'name',
-				dest: './leadpages-template/js/',
+				dest: './leadpages-template/js',
 				showChange: true
 			})
 		)
@@ -26,21 +26,20 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 		.pipe(gulp.dest('./leadpages-template/js'))
 		.pipe(connect.reload());
 
-	gulp.src(['./scripts/scripts-header.js','./scripts/app/**/!(scripts-footer)*.js','./scripts/scripts-footer.js'])
+	gulp.src(['./scripts/global.js','./scripts/scripts-header.js','./scripts/!(scripts-footer).js','./scripts/!(global).js','./scripts/app/**/*.js','./scripts/scripts-footer.js'])
 		.pipe(
 			debug({
-				before: 'Compiling function.js',
+				before: 'Compiling functions.js',
 				after: 'Finished compiling functions.js',
 				basename: 'functions',
 				extname: '.js',
 				display: 'name',
-				dest: './leadpages-template/js/',
+				dest: './build/js/src',
 				showChange: true
 			})
 		)
 		.pipe(concat('functions.js'))
-    		.pipe(gulpif( yargs.min, uglify() ))
-    		.on('error', handleErrors)
-		.pipe(gulp.dest('./leadpages-template/js'))
+			.on('error', handleErrors)
+		.pipe(gulp.dest('./build/js/src'))
 		.pipe(connect.reload());
 });

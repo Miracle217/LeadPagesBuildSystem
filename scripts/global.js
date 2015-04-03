@@ -1,0 +1,1 @@
+//Global variables go here. Such as var requestedHeight = xxx;
