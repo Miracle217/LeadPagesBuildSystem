@@ -23,6 +23,4 @@ gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload
 
 	gulp.watch(templateFiles, ['zip']);
 
-	gulp.watch(templateFiles, ['zip']);
-
 });

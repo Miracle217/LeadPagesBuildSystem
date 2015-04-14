@@ -2,8 +2,8 @@ var gulp = require('gulp-help')(require('gulp'));
 var newer = require('gulp-newer');
 var imagemin = require('gulp-imagemin');
 
-var imgSrc = './images';
-var imgDest = '/leadpages-template/img';
+var imgSrc = './images/**/*';
+var imgDest = './leadpages-template/img';
 
 // Minify any new images
 gulp.task('images', 'Optimize images', function() {
