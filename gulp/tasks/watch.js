@@ -5,7 +5,7 @@ var gulpif = require('gulp-if');
 
 gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload. ', function () {
 
-  	gulp.watch('./html/index.html', ['html']);
+  	gulp.watch('./leadpages-template/index.html', ['html']);
 
 	gulp.watch(['./less/**/*.less'], ['less']);
 	gulp.watch(['./scss/**/*.scss'], ['sass']);
