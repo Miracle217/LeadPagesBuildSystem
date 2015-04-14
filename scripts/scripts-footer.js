@@ -1,2 +1,3 @@
-	});
+		}); //docready
+	}); //Window.load
 })(jQuery);
