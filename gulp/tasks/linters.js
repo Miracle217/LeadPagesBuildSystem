@@ -1,4 +1,4 @@
-var gulp = require('gulp-help')(require('gulp'));
+	var gulp = require('gulp-help')(require('gulp'));
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var jsonlint = require('gulp-jsonlint')
