@@ -4,7 +4,7 @@ var concat = require('gulp-concat');
 var connect = require('gulp-connect');
 var handleErrors = require('../util/handleErrors');
 
-gulp.task('uglify', function() {
+gulp.task('uglify', 'Uglify JS files', function() {
   gulp.src('./build/js/src/*.js')
     .pipe(uglify())
     .pipe(concat('functions.js'))
