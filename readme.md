@@ -69,7 +69,7 @@ Your Template Folder
 |     | 	| --- vendor.js (output from the "scripts/vendor" folder)
 |     | --- meta/
 |     | 	| --- template.json
-| --- less (You can delete this if you prefer less)
+| --- less (You can delete this if you prefer SASS)
 | 	  | --- _settings.colors.less (Base colors: font colors, background etc...)
 |	  | --- _settings.global.less (variables for fonts etc...)
 |	  | --- mixins/
@@ -85,7 +85,7 @@ Your Template Folder
 | --- global.js (Global scripts or anything that needs to be outside of the jquery wrappers, such as `var leadpages_input_data` or `var requestedHeight`)
 | --- scripts-footer.js (Do not remove! Use for wrapping `function.js`)
 | --- scripts-header.js (Do not remove! Use for wrapping `function.js`)
-| --- scss/ (You can delete this if you prefer less)
+| --- scss/ (You can delete this if you prefer LESS)
 | 	  | --- _settings.colors.scss (Base colors: font colors, background etc...)
 |	  | --- _settings.global.scss (variables for fonts etc...)
 |	  | --- mixins/
