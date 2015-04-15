@@ -6,7 +6,7 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 var tjson = require('../../leadpages-template/meta/template.json');
 
-var paths = ['./leadpages-template/**/*'];
+var paths = ['./build/temp/**/**/*'];
 
 gulp.task('zip', 'Zip up the `leadpages-template` folder', function () {
 	var fileName = 'leadpages-template ' + tjson.version + '.zip';

@@ -8,5 +8,5 @@ gulp.task('uglify', 'Uglify JS files', function() {
   gulp.src('./build/js/src/*.js')
     .pipe(uglify())
     .pipe(concat('functions.js'))
-    .pipe(gulp.dest('./leadpages-template/js'))
+    .pipe(gulp.dest('./build/js/dist'))
 });
