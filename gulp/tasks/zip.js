@@ -40,7 +40,7 @@ gulp.task('zip', 'Zip up the `leadpages-template` folder', function () {
 		});
 	}
 
-	return gulp.src(paths, {base: "./leadpages-template"})
+	return gulp.src(paths, {base: "./build/dist/"})
 		.pipe(plumber())
 		.pipe(zip(leadPagesTemplateName))
 		.pipe(gulp.dest('./'));
