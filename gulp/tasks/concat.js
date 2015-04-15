@@ -6,7 +6,6 @@ var debug = require('gulp-debug');
 var yargs = require('yargs').argv;
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
-var cache = require('gulp-cached');
 
 var destination = './leadpages-template/js'
 
@@ -24,7 +23,6 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 				showChange: true
 			})
 		)
-		.pipe(cache('buildVendorJS'))
 		.pipe(concat('vendor.js'))
     		.on('error', handleErrors)
 		.pipe(gulp.dest(destination))
@@ -42,7 +40,6 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 				showChange: true
 			})
 		)
-		.pipe(cache('buildFunctionsJS'))
 		.pipe(concat('functions.js'))
 			.on('error', handleErrors)
 		.pipe(gulp.dest(destination))

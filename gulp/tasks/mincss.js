@@ -5,15 +5,13 @@ var minify = require('gulp-cssmin');
 var stripComments = require('gulp-strip-comments');
 var debug = require('gulp-debug');
 var handleErrors = require('../util/handleErrors');
-var cache = require('gulp-cached');
 
 var path = './leadpages-template/css/*.css';
-var destination = './build/dist/leadpages-template/css'
+var destination = './build/dist/leadpages-template/css/'
 
 gulp.task('minCSS', 'Minify CSS', function(){
 	gulp.src(path)
 		.pipe(debug({title: 'Minifying: '}))
-		.pipe(cache('minifycss'))
 		.pipe(minify())
     	.pipe(stripComments())
     		.on('error', handleErrors)
