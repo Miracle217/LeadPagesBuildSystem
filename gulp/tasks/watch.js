@@ -2,10 +2,10 @@ var gulp = require('gulp-help')(require('gulp'));
 var yargs = require('yargs').argv;
 var gulpif = require('gulp-if');
 
-var indexHTML = './leadpages-template/index.html',
-	tmpLPFolder = './build/tmp/**/**/*',
-	tmpCSS = './build/tmp/leadpages-template/css/*.css',
-	tmpJS = './build/tmp/leadpages-template/js/*.js',
+var htmlFiles = './leadpages-template/*.html',
+	tmpLPFolder = './build/src/**/**/*',
+	tmpCSS = './build/src/leadpages-template/css/*.css',
+	tmpJS = './build/src/leadpages-template/js/*.js',
 	scriptFiles = './scripts/app/**/*.js',
 	lessFiles = './less/**/*.less',
 	sassFiles = './scss/**/*.scss',
@@ -14,7 +14,7 @@ var indexHTML = './leadpages-template/index.html',
 
 gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload. ', function () {
 
-  	gulp.watch([indexHTML], ['html']);
+  	gulp.watch([htmlFiles], ['html']);
 
   	gulp.watch(['./leadpages-template/img/*'], ['images']);
 
@@ -24,7 +24,7 @@ gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload
 	gulp.watch([scriptFiles], ['lint']);
 	gulp.watch([scriptFiles], ['concat']);
 
-	gulp.watch([templateFiles], ['copy']);
+	//gulp.watch([templateFiles], ['copy']);
 
 	gulp.watch([tmpJS], ['uglify']);
 	gulp.watch([tmpCSS], ['minCSS']);

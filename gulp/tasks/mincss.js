@@ -5,18 +5,17 @@ var minify = require('gulp-cssmin');
 var stripComments = require('gulp-strip-comments');
 var debug = require('gulp-debug');
 var handleErrors = require('../util/handleErrors');
-var concat = require('gulp-concat');
-var connect = require('gulp-connect');
-var cache = require('gulp-cache');
+var cache = require('gulp-cached');
+
+var path = './leadpages-template/css/*.css';
+var destination = './build/dist/leadpages-template/css'
 
 gulp.task('minCSS', 'Minify CSS', function(){
-	gulp.src('./build/css/src/*.css')
+	gulp.src(path)
+		.pipe(debug({title: 'Minifying: '}))
 		.pipe(cache('minifycss'))
 		.pipe(minify())
     	.pipe(stripComments())
     		.on('error', handleErrors)
-    	.pipe(concat('style.css'))
-			.on('error', handleErrors)
-    	.pipe(gulp.dest('./build/css/dist'))
-    	.pipe(connect.reload());
+    	.pipe(gulp.dest(destination));
 });
