@@ -1,4 +1,4 @@
-var gulp = require('gulp-help')(require('gulp'));
+var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var zip = require('gulp-zip');
 
@@ -6,15 +6,15 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 var tjson = require('../../leadpages-template/meta/template.json');
 
-var paths = ['./leadpages-template/**/*'];
+var paths = ['./build/dist/leadpages-template/**/*'];
 
-gulp.task('zip', 'Zip up the `leadpages-template` folder', function () {
+gulp.task('zip',['copy', 'uglify', 'mincss'], function () {
 	var fileName = 'leadpages-template ' + tjson.version + '.zip';
 	var leadPagesTemplateName = './leadpages-template.zip';
 
 	// if the versioned zip file exists, delete it
 	if(fs.existsSync('./' + fileName)) {
-		console.log('deleting: ', fileName);
+		console.log('Deleting: ', fileName);
 		var command = 'rm -rf ' + '"' + fileName + '"';
 		exec(command, function (err) {
 			if (err) {
@@ -40,7 +40,7 @@ gulp.task('zip', 'Zip up the `leadpages-template` folder', function () {
 		});
 	}
 
-	return gulp.src(paths, {base: "."})
+	return gulp.src(paths, {base: "./build/dist/"})
 		.pipe(plumber())
 		.pipe(zip(leadPagesTemplateName))
 		.pipe(gulp.dest('./'));
