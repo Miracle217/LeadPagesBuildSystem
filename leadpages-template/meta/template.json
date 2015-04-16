@@ -45,6 +45,26 @@
         }
     },
     "elements": [
-        {"id": "header", "name": "Header", "type": "text"}
+        {
+            "id": "text--header",
+            "name": "Header",
+            "type": "text"
+        },
+        {
+            "id": "container--main",
+            "name": "Main Container",
+            "type": "container"
+        },
+        {
+            "id": "text--main",
+            "name": "Main Text",
+            "type": "text"
+        },
+        {
+            "id": "image--cat",
+            "name": "Kitty Cat",
+            "type": "image"
+        }
+
     ]
 }
