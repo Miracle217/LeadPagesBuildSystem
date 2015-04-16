@@ -13,7 +13,7 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 
 	gulp.src(['./scripts/vendor/**/*.js'])
 		.pipe(
-			debug({
+			logger({
 				before: 'Compiling vendor.js',
 				after: 'Finished compiling vendor.js',
 				basename: 'vendor',
