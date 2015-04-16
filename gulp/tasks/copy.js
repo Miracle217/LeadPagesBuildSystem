@@ -1,12 +1,10 @@
 var gulp = require('gulp-help')(require('gulp'));
-var plumber = require('gulp-plumber');
-var cache = require('gulp-cached');
 
-var path = ['./leadpages-template/**/*'];
-var destination = './build/dist/'
+var path = './build/dist/leadpages-template/**/*';
+var destination = './build/dist/leadpages-template';
 
-gulp.task('copy', 'Make a temp copy of leadpages-template for zipping', function(){
-	gulp.src(path, {base: '.'})
-		.pipe(cache('copying'))
-		.pipe(gulp.dest(destination))
+gulp.task('copy', 'Make a temp copy of leadpages-template for zipping', function(cb){
+	gulp.src(path)
+		.pipe(gulp.dest(destination));
+	cb();
 });

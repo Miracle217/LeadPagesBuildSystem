@@ -2,32 +2,30 @@ var gulp = require('gulp-help')(require('gulp'));
 var yargs = require('yargs').argv;
 var gulpif = require('gulp-if');
 
-var htmlFiles = './leadpages-template/*.html',
-	tmpLPFolder = './build/dist/leadpages-template/**/*',
-	tmpCSS = './build/src/leadpages-template/css/*.css',
-	tmpJS = './build/src/leadpages-template/js/*.js',
-	scriptFiles = './scripts/app/**/*.js',
-	lessFiles = './less/**/*.less',
-	sassFiles = './scss/**/*.scss',
-	imageFiles = './images/**/*',
-	templateFiles = './leadpages-template/**/*';
+var paths = {
+	templateFiles: './leadpages-template/**/*',
+	buildFolder: './build/dist/leadpages-template/**/*',
+	htmlFiles: './leadpages-template/*.html',
+	scriptFiles: './scripts/**/*.js',
+	lessFiles: './less/**/*.less',
+	sassFiles: './scss/**/*.scss',
+	imageFiles: './leadpages-template/img/*'
+};
 
 gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload. ', function () {
 
-  	gulp.watch([htmlFiles], ['html']);
+  	gulp.watch([paths.htmlFiles], ['html']);
 
-  	gulp.watch(['./leadpages-template/img/*'], ['images']);
+  	gulp.watch([paths.imageFiles], ['images']);
 
-	gulp.watch([lessFiles], ['less']);
-	gulp.watch([sassFiles], ['sass']);
+	gulp.watch([paths.lessFiles], ['less']);
+	gulp.watch([paths.sassFiles], ['sass']);
 
-	gulp.watch([scriptFiles], ['lint']);
-	gulp.watch([scriptFiles], ['concat']);
+	gulp.watch([paths.scriptFiles], ['lint']);
+	gulp.watch([paths.scriptFiles], ['concat']);
 
-	gulp.watch([templateFiles], ['copy']);
+	gulp.watch([paths.templateFiles], ['copy']);
 
-	gulp.watch([tmpJS], ['uglify']);
-	gulp.watch([tmpCSS], ['minCSS']);
-	gulp.watch([tmpLPFolder], ['zip']);
+	gulp.watch([paths.buildFolder], ['zip']);
 
 });

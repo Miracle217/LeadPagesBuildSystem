@@ -1,4 +1,4 @@
-var gulp = require('gulp-help')(require('gulp'));
+var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var zip = require('gulp-zip');
 
@@ -8,7 +8,7 @@ var tjson = require('../../leadpages-template/meta/template.json');
 
 var paths = ['./build/dist/leadpages-template/**/*'];
 
-gulp.task('zip', 'Zip up the `leadpages-template` folder', function () {
+gulp.task('zip', ['uglify', 'mincss'], function () {
 	var fileName = 'leadpages-template ' + tjson.version + '.zip';
 	var leadPagesTemplateName = './leadpages-template.zip';
 

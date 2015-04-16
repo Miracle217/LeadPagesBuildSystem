@@ -28,20 +28,20 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 		.pipe(gulp.dest(destination))
 		.pipe(connect.reload());
 
-	gulp.src(['./scripts/global.js','./scripts/scripts-header.js','./scripts/!(scripts-footer).js','./scripts/!(global).js','./scripts/app/**/*.js','./scripts/scripts-footer.js'])
+	gulp.src(['./scripts/scripts-header.js','./scripts/app/**/*.js','./scripts/scripts-footer.js'])
 		.pipe(
 			debug({
-				before: 'Compiling functions.js',
+				before: 'Compiling function.js',
 				after: 'Finished compiling functions.js',
 				basename: 'functions',
 				extname: '.js',
 				display: 'name',
-				dest: destination,
+				dest: './leadpages-template/js',
 				showChange: true
 			})
 		)
 		.pipe(concat('functions.js'))
-			.on('error', handleErrors)
-		.pipe(gulp.dest(destination))
+    		.on('error', handleErrors)
+		.pipe(gulp.dest('./leadpages-template/js'))
 		.pipe(connect.reload());
 });

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/scottsilvi/LeadPagesBuildSystem",
   "devDependencies": {
+    "del": "^1.1.1",
     "gulp": "^3.8.8",
     "gulp-cached": "^1.0.4",
     "gulp-concat": "^2.4.1",
