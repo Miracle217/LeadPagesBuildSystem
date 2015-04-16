@@ -8,13 +8,13 @@ var tjson = require('../../leadpages-template/meta/template.json');
 
 var paths = ['./build/dist/leadpages-template/**/*'];
 
-gulp.task('zip', ['uglify', 'mincss'], function () {
+gulp.task('zip', function () {
 	var fileName = 'leadpages-template ' + tjson.version + '.zip';
 	var leadPagesTemplateName = './leadpages-template.zip';
 
 	// if the versioned zip file exists, delete it
 	if(fs.existsSync('./' + fileName)) {
-		console.log('deleting: ', fileName);
+		console.log('Deleting: ', fileName);
 		var command = 'rm -rf ' + '"' + fileName + '"';
 		exec(command, function (err) {
 			if (err) {

@@ -2,7 +2,7 @@ var gulp = require('gulp-help')(require('gulp'));
 var connect = require('gulp-connect');
 var concat = require('gulp-concat');
 var handleErrors = require('../util/handleErrors');
-var debug = require('gulp-debug');
+var logger = require('gulp-logger');
 var yargs = require('yargs').argv;
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
@@ -30,7 +30,7 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 
 	gulp.src(['./scripts/scripts-header.js','./scripts/app/**/*.js','./scripts/scripts-footer.js'])
 		.pipe(
-			debug({
+			logger({
 				before: 'Compiling function.js',
 				after: 'Finished compiling functions.js',
 				basename: 'functions',

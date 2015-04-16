@@ -7,7 +7,7 @@ var handleErrors = require('../util/handleErrors');
  * NOTE: Excluding vendor.js from minifying. Weird stuff could happen
  */
 var paths = {
-	js: ['./leadpages-template/js/*.js', '!./leadpages-template/js/vendor.js'],
+	js: ['./leadpages-template/js/*.js', '!./leadpages-template/js/vendor.js', '!./leadpages-template/js/html5shiv.js'],
 	dest: './build/dist/leadpages-template/js'
 };
 

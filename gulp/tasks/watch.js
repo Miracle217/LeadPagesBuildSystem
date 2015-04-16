@@ -21,10 +21,15 @@ gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload
 	gulp.watch([paths.lessFiles], ['less']);
 	gulp.watch([paths.sassFiles], ['sass']);
 
+	gulp.watch([paths.cssFiles], ['css']);
+
 	gulp.watch([paths.scriptFiles], ['lint']);
 	gulp.watch([paths.scriptFiles], ['concat']);
 
 	gulp.watch([paths.templateFiles], ['copy']);
+
+	gulp.watch([paths.templateFiles], ['uglify']);
+	gulp.watch([paths.templateFiles], ['mincss']);
 
 	gulp.watch([paths.buildFolder], ['zip']);
 
