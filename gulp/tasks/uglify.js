@@ -11,11 +11,14 @@ var paths = {
 	dest: './build/dist/leadpages-template/js'
 };
 
-gulp.task('uglify', 'Uglify JS files', function(cb) {
-	return gulp.src(paths.js)
-		.pipe(debug({ title: 'Uglifying...' }))
-		.pipe(uglify())
-			.on('error', handleErrors)
-		.pipe(gulp.dest(paths.dest));
-	cb();
+gulp.task('uglify', 'Uglify JS files', function(doneMinJS) {
+	//Race condition work around
+	setTimeout(function(){
+		gulp.src(paths.js)
+			.pipe(debug({ title: 'Uglifying...' }))
+			.pipe(uglify())
+				.on('error', handleErrors)
+			.pipe(gulp.dest(paths.dest));
+		doneMinJS();
+	}, 1000);
 });

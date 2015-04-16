@@ -8,7 +8,7 @@ var tjson = require('../../leadpages-template/meta/template.json');
 
 var paths = ['./build/dist/leadpages-template/**/*'];
 
-gulp.task('zip',['copy', 'mincss', 'uglify'], function (cb) {
+gulp.task('zip',['copy', 'uglify', 'mincss'], function () {
 	var fileName = 'leadpages-template ' + tjson.version + '.zip';
 	var leadPagesTemplateName = './leadpages-template.zip';
 
@@ -44,5 +44,4 @@ gulp.task('zip',['copy', 'mincss', 'uglify'], function (cb) {
 		.pipe(plumber())
 		.pipe(zip(leadPagesTemplateName))
 		.pipe(gulp.dest('./'));
-	cb();
 });
