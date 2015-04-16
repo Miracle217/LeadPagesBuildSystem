@@ -12,10 +12,10 @@ var paths = {
 };
 
 gulp.task('uglify', 'Uglify JS files', function(cb) {
-	gulp.src(paths.js)
+	return gulp.src(paths.js)
 		.pipe(debug({ title: 'Uglifying...' }))
 		.pipe(uglify())
 			.on('error', handleErrors)
 		.pipe(gulp.dest(paths.dest));
-	cb()
+	cb();
 });

@@ -36,7 +36,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 3. `cd LeadPagesBuildSystem && ./install`
 4. `cd ..` Even after the folders were deleted, Bash script can only executes in the current directory so it can't `cd` up one level.
 5. `npm install`
-6. Type `gulp start` in the terminal to start gulp
+6. Type `gulp start` in the terminal to start coding
 7. Done!
 
 
@@ -55,7 +55,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 4. `gulp vendorcss`: Put vendor's **CSS** in here. Compile to `leadpages-template/css/vendor.css` from scss/less -> vendor/*.css. If you use vendor less/scss, recommend importing them into template.scss/less which gives you a lot more control over what's being compile first.
 5. `gulp watch` : Watch changes on html, SASS/Less and `LiveReload`, `lint` JS & template.json, as well as `zip` up `leadpages-template.zip` if changes are detected in `/meta/template.json`.
    * **Note:** The `watch` task watches changes from both the `scss` and `less` folders. Obviously, you don't need both SASS & Less, just delete one of folders. The task will ignore the one that doesn't exist.
-6. `gulp zip` : Minify js/css files then zip up the `leadpages-template` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
+6. `gulp zip` : Runs `copy`, `mincss`, and `uglify` tasks then zip up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
 
 ##Folders Structure Notes
 

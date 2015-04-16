@@ -5,17 +5,18 @@ var debug = require('gulp-debug');
 var handleErrors = require('../util/handleErrors');
 
 /**
- * NOTE: Excluding vendor.js from minifying. Weird stuff could happen
+ * NOTE: Excluding vendor.css from minifying. Weird stuff could happen
  */
 var paths = {
-	cssFiles: ['./leadpages-template/css/style.css'],
+	cssFiles: ['./leadpages-template/css/*.css', '!./leadpages-template/css/vendor.css'],
 	dest: './build/dist/leadpages-template/css'
 };
 
 gulp.task('mincss', 'Minify CSS', function(cb){
-	gulp.src(paths.cssFiles)
+	return gulp.src(paths.cssFiles)
 		.pipe(debug({ title: 'Minifying: ' }))
 		.pipe(stripComments())
+			.on('error', handleErrors)
 		.pipe(minify())
 			.on('error', handleErrors)
     	.pipe(gulp.dest(paths.dest));
