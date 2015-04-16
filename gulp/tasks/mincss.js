@@ -1,20 +1,26 @@
 var gulp = require('gulp-help')(require('gulp'));
-var gulpif = require('gulp-if');
-var yargs = require('yargs').argv;
 var minify = require('gulp-cssmin');
 var stripComments = require('gulp-strip-comments');
 var debug = require('gulp-debug');
 var handleErrors = require('../util/handleErrors');
-var concat = require('gulp-concat');
-var connect = require('gulp-connect');
 
-gulp.task('minCSS', 'Minify CSS', function(){
-	gulp.src('./build/css/src/*.css')
-		.pipe(minify())
-    	.pipe(stripComments())
-    		.on('error', handleErrors)
-    	.pipe(concat('style.css'))
-			.on('error', handleErrors)
-    	.pipe(gulp.dest('./leadpages-template/css'))
-    	.pipe(connect.reload());
+/**
+ * NOTE: Excluding vendor.css from minifying. Weird stuff could happen
+ */
+var paths = {
+	cssFiles: ['./leadpages-template/css/*.css', '!./leadpages-template/css/vendor.css'],
+	dest: './build/dist/leadpages-template/css'
+};
+
+gulp.task('mincss', 'Minify CSS', function(){
+	//Race condition work around
+	setTimeout(function(){
+		gulp.src(paths.cssFiles)
+			.pipe(debug({ title: 'Minifying: ' }))
+			.pipe(stripComments())
+				.on('error', handleErrors)
+			.pipe(minify())
+				.on('error', handleErrors)
+	    	.pipe(gulp.dest(paths.dest));
+	},500);
 });

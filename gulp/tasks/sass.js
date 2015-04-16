@@ -10,6 +10,6 @@ gulp.task('sass', 'Watch changes in the `scss` folder and compile to `leadpages-
     		.on('error', handleErrors)
 		.pipe(concat('style.css'))
     		.on('error', handleErrors)
-		.pipe(gulp.dest('./build/css/src'))
+		.pipe(gulp.dest('./leadpages-template/css'))
 		.pipe(connect.reload());
 });
