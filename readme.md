@@ -67,10 +67,11 @@ To give you a better idea how to work this build system, please refer below for 
 
 ````
 Your Template Folder
-| -- index.html
-| -- images (All images below this folder will be optimized & copied to `./leadpages-template/img/`)
-| --- gulp
-| --- tasks
+| --- index.html
+| --- build/ (A temp folder for debugging purpose and minifications before zipping)
+| --- images/ (All images below this folder will be optimized & copied to `./leadpages-template/img/`)
+| --- gulp/
+| --- tasks/
 |	  | --- (Files within here are all of the gulp tasks. You can customize to fit your work flow!)
 | --- gulfile.js (DO NOT REMOVE)
 | --- leadpages-template/
