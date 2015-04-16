@@ -1,6 +1,6 @@
 {
   "name": "LeadPagesBuildSystem",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Build System to automate workflow for LeadPages template creation",
   "main": "gulpfile.js",
   "repository": {
@@ -10,12 +10,12 @@
   "keywords": [
     "LeadPages"
   ],
-  "author": "Scott Silvi",
+  "author": "Scott Silvi, Mon Lu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/scottsilvi/LeadPagesBuildSystem/issues"
+    "url": "https://github.com/LeadPages/LeadPagesBuildSystem/issues"
   },
-  "homepage": "https://github.com/scottsilvi/LeadPagesBuildSystem",
+  "homepage": "https://github.com/LeadPages/LeadPagesBuildSystem",
   "devDependencies": {
     "del": "^1.1.1",
     "gulp": "^3.8.8",
