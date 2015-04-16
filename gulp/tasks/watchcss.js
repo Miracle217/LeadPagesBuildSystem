@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var connect = require('gulp-conncect');
+var connect = require('gulp-connect');
 
 var path = {
 	src: './leadpages-template/css/*.css'

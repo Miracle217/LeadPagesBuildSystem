@@ -9,6 +9,7 @@ var paths = {
 	scriptFiles: './scripts/**/*.js',
 	lessFiles: './less/**/*.less',
 	sassFiles: './scss/**/*.scss',
+	cssFiles: './leadpages-template/css/*.css',
 	imageFiles: './leadpages-template/img/*'
 };
 

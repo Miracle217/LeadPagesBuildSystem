@@ -23,6 +23,7 @@ If you are starting fresh, try our [yeoman generator](https://github.com/LeadPag
 2. `git clone https://github.com/LeadPages/LeadPagesBuildSystem .` (The **.** at the end is important!)
  * Or download a [zip file here](https://github.com/LeadPages/LeadPagesBuildSystem/archive/master.zip) and unzip to **outside** of `leadpages-template` folder
 3. In the terminal, run `./install`
+4. Type `gulp start` in the terminal to start watching the files
 5. Done!
 
 ### Existing Template *with* Git
@@ -35,7 +36,8 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 3. `cd LeadPagesBuildSystem && ./install`
 4. `cd ..` Even after the folders were deleted, Bash script can only executes in the current directory so it can't `cd` up one level.
 5. `npm install`
-6. Done!
+6. Type `gulp start` in the terminal to start gulp
+7. Done!
 
 
 ##Available Gulp Tasks
@@ -43,24 +45,37 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 1. `gulp` or `gulp help` : Show available gulp tasks
 1. `gulp start` : `connect`, `open` (the default browser), `watch`
 2. `gulp concat` : Compile `functions.js` from `scripts/app/*.js` and wrap them with jQuery `docready` and `window.load`, and compile `vendor.js` from `scripts/vendor/**/*.js` (jquery-1.9.1.min.js is always included first, you can also delete it if you don't want jQuery)
-3. `gulp html` : `LiveReload` the `index.html` if there are changes
+2. `gulp copy`: Task to copy `leadpages-template` folder for minifications before zipping it up
+2. `gulp css`: If you are _NOT_ using **sass or less**, this will watch for all changes in `./leadpages-template/css/*.css`. Meaning, edit css directly in that folder.
+3. `gulp html` : `LiveReload` any `html` files if there are changes in `./leadpages-template/*.html`
+3. `gulp images`: Optimize images from `./images` folder then move them to `./leadpages-template/img` folder
 4. `gulp lint`: Run JSHint on all JS files and lint `meta/template.json`
 4. `gulp sass` : Compile & minify SASS files from `/scss/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
 4. `gulp less` : Compile & minify LESS files from `/less/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
 4. `gulp vendorcss`: Put vendor's **CSS** in here. Compile to `leadpages-template/css/vendor.css` from scss/less -> vendor/*.css. If you use vendor less/scss, recommend importing them into template.scss/less which gives you a lot more control over what's being compile first.
 5. `gulp watch` : Watch changes on html, SASS/Less and `LiveReload`, `lint` JS & template.json, as well as `zip` up `leadpages-template.zip` if changes are detected in `/meta/template.json`.
    * **Note:** The `watch` task watches changes from both the `scss` and `less` folders. Obviously, you don't need both SASS & Less, just delete one of folders. The task will ignore the one that doesn't exist.
-6. `gulp zip` : Zip up the `leadpages-template` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json` if you uploading updates.)
+6. `gulp zip` : Minify js/css files then zip up the `leadpages-template` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
 
 ##Folders Structure Notes
 
+To give you a better idea how to work this build system, please refer below for the files structure. But in general:
+
+* You'd edit `index.html` directly inside `./leadpages-template/` folder
+* If you are *not* using **less or sass**, you would edit `style.css` directly inside the `./leadpages-template` folder
+* SASS, LESS, and JS have their respective folders and see below for more explanations.
+
 ````
 Your Template Folder
+| -- index.html
+| -- images (All images below this folder will be optimized & copied to `./leadpages-template/img/`)
 | --- gulp
-| --- gulfile.js
+| --- tasks
+|	  | --- (Files within here are all of the gulp tasks. You can customize to fit your work flow!)
+| --- gulfile.js (DO NOT REMOVE)
 | --- leadpages-template/
 |     | --- css/
-|     | 	| --- style.css (Compiled from either the "scss" or "less" folder)
+|     | 	| --- style.css (Compiled from either the "scss" or "less" folder OR edit directly if no SASS or LESS is used)
 |     | --- fonts/
 |     | --- img/
 |     | --- js/
@@ -69,23 +84,22 @@ Your Template Folder
 |     | 	| --- vendor.js (output from the "scripts/vendor" folder)
 |     | --- meta/
 |     | 	| --- template.json
-| --- less (You can delete this if you prefer SASS)
+| --- less (You can delete this if you prefer SASS or Yeoman will clean this up for you)
 | 	  | --- _settings.colors.less (Base colors: font colors, background etc...)
 |	  | --- _settings.global.less (variables for fonts etc...)
 |	  | --- mixins/
 |	  | 	| --- css3.less (Mixins examples)
 |	  | --- template.less (Put your custom css here or import others in here.)
-| --- node_modules
-| --- package.json
+| --- node_modules (Added to .gitignore and DO NOT REMOVE)
+| --- package.json (DO NOT REMOVE)
 | --- scripts/
 |	  | --- app/ (JS in here will output to `leadpages-template/js/functions.js`)
 |	  |	    | --- something.js
 |     | --- vendor/ (JS in here will output to `leadpages-template/js/vendor.js`)
-|     |     | --- jquery.1.9.1.min.js (And other 3rd party scripts)
-| --- global.js (Global scripts or anything that needs to be outside of the jquery wrappers, such as `var leadpages_input_data` or `var requestedHeight`)
+|     |     | --- jquery.1.9.1.min.js (And other 3rd party scripts. jQuery will always include first)
 | --- scripts-footer.js (Do not remove! Use for wrapping `function.js`)
-| --- scripts-header.js (Do not remove! Use for wrapping `function.js`)
-| --- scss/ (You can delete this if you prefer LESS)
+| --- scripts-header.js (Do not remove! Use for wrapping `function.js` and you can add `global` variables on top of this file)
+| --- scss/ (You can delete this if you prefer LESS or Yeoman will clean this up for you)
 | 	  | --- _settings.colors.scss (Base colors: font colors, background etc...)
 |	  | --- _settings.global.scss (variables for fonts etc...)
 |	  | --- mixins/
