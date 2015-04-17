@@ -43,19 +43,9 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 ##Available Gulp Tasks
 
 1. `gulp` or `gulp help` : Show available gulp tasks
-1. `gulp start` : `connect`, `open` (the default browser), `watch`
-2. `gulp concat` : Compile `functions.js` from `scripts/app/*.js` and wrap them with jQuery `docready` and `window.load`, and compile `vendor.js` from `scripts/vendor/**/*.js` (jquery-1.9.1.min.js is always included first, you can also delete it if you don't want jQuery)
-2. `gulp copy`: Task to copy `leadpages-template` folder for minifications before zipping it up
-2. `gulp css`: If you are _NOT_ using **sass or less**, this will watch for all changes in `./leadpages-template/css/*.css`. Meaning, edit css directly in that folder.
-3. `gulp html` : `LiveReload` any `html` files if there are changes in `./leadpages-template/*.html`
-3. `gulp images`: Optimize images from `./images` folder then move them to `./leadpages-template/img` folder
-4. `gulp lint`: Run JSHint on all JS files and lint `meta/template.json`
-4. `gulp sass` : Compile & minify SASS files from `/scss/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
-4. `gulp less` : Compile & minify LESS files from `/less/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
-4. `gulp vendorcss`: Put vendor's **CSS** in here. Compile to `leadpages-template/css/vendor.css` from scss/less -> vendor/*.css. If you use vendor less/scss, recommend importing them into template.scss/less which gives you a lot more control over what's being compile first.
-5. `gulp watch` : Watch changes on html, SASS/Less and `LiveReload`, `lint` JS & template.json, as well as `zip` up `leadpages-template.zip` if changes are detected in `/meta/template.json`.
-   * **Note:** The `watch` task watches changes from both the `scss` and `less` folders. Obviously, you don't need both SASS & Less, just delete one of folders. The task will ignore the one that doesn't exist.
-6. `gulp zip` : Runs `copy`, `mincss`, and `uglify` tasks then zip up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
+2. `gulp start` : `connect`, `open` (the default browser), `watch`
+3. `gulp build` : This task will compile sass/less/css/js and output to the `./leadpages-template` folder
+4. `gulp zip` : Runs `copy`, `mincss`, and `uglify` tasks then zip up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
 
 ##Folders Structure Notes
 
