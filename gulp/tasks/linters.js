@@ -1,11 +1,11 @@
-	var gulp = require('gulp-help')(require('gulp'));
+var gulp = require('gulp-help')(require('gulp'));
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var jsonlint = require('gulp-jsonlint')
 var debug = require('gulp-debug');
 
 gulp.task('lint', 'Lint JS files', function(){
-	gulp.src('./build/js/src/*.js')
+	gulp.src('./leadpages-template/js/*.js')
 		.pipe(debug({title: 'Linting: '}))
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish))
