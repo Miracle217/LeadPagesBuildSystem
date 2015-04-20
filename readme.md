@@ -32,6 +32,7 @@ Very much the same reason as `style.css` above. If you _don't_ want to have all 
 
 If you are starting fresh, try our [yeoman generator](https://github.com/LeadPages/LeadPagesYeoman) that it comes with the LeadPages&trade; Build System!
 
+1. Open up your Terminal or GitSCM Bash Terminal (Windows)
 1. `cd` into your **root** directory where you have the `leadpages-template` folder
 2. `git clone https://github.com/LeadPages/LeadPagesBuildSystem .` (The **.** at the end is important!)
  * Or download a [zip file here](https://github.com/LeadPages/LeadPagesBuildSystem/archive/master.zip) and unzip to **outside** of `leadpages-template` folder
