@@ -4,6 +4,18 @@ The LeadPages&trade; Template Build System is for templates authoring to be sold
 
 This Build System will work for both existing or new LeadPages&trade; templates. If you are concern that this will overwrite your existing project, don't worry. The following installation script will check if you have an existing `leadpages-template` folder, if it does, it'll leave your `leadpages-template` alone and just grab the necessary build system files. Otherwise, it'll grab a new skeleton `leadpages-template` for you. Lastly, it'll also initialized a clean git repository for you.
 
+##IMPORTANT: Before You Begin
+
+If you are installing this build system as a _standalone_ (meaning not using Yeoman):
+
+### /leadpages-template/css/style.css
+
+If you _are_ using either sass or less **with** your _existing_ template, either copy the contents of `/leadpags-template/css/style.css` into `template.scss/less` or make a copy to include it in `template.scss/less`. Because `gulp start` **will overwrite** your `/leadpages-template/css/style.css`!!
+
+### JS files in `/leadpages-template/js/`
+
+Very much the same reason as `style.css` above. If you _don't_ want to have all of your JS inside the `scripts` folder, you can just remove the `scripts` folder. If you _do_, **make sure** you move the contents in `functions.js` to `scripts/app/somefile.js`.
+
 ##Installation
 
 ###Requirements
@@ -15,6 +27,7 @@ This Build System will work for both existing or new LeadPages&trade; templates.
 	  Download and install [Git SCM](http://git-scm.com/download/win)
 2. [NodeJS](http://nodejs.com)
 
+
 ### New Template or Existing Template *without* Git ###
 
 If you are starting fresh, try our [yeoman generator](https://github.com/LeadPages/LeadPagesYeoman) that it comes with the LeadPages&trade; Build System!
@@ -23,7 +36,8 @@ If you are starting fresh, try our [yeoman generator](https://github.com/LeadPag
 2. `git clone https://github.com/LeadPages/LeadPagesBuildSystem .` (The **.** at the end is important!)
  * Or download a [zip file here](https://github.com/LeadPages/LeadPagesBuildSystem/archive/master.zip) and unzip to **outside** of `leadpages-template` folder
 3. In the terminal, run `./install`
-4. Type `gulp start` in the terminal to start watching the files
+6. **Before** you type `gulp start`, please read the **IMPORTANT: Before You Begin** section
+4. Type `gulp start` in the terminal to start
 5. Done!
 
 ### Existing Template *with* Git
@@ -36,6 +50,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 3. `cd LeadPagesBuildSystem && ./install`
 4. `cd ..` Even after the folders were deleted, Bash script can only executes in the current directory so it can't `cd` up one level.
 5. `npm install`
+6. **Before** you type `gulp start`, please read the notes in **IMPORTANT: Before You Begin** section
 6. Type `gulp start` in the terminal to start coding
 7. Done!
 
@@ -44,18 +59,8 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 
 1. `gulp` or `gulp help` : Show available gulp tasks
 1. `gulp start` : `connect`, `open` (the default browser), `watch`
-2. `gulp concat` : Compile `functions.js` from `scripts/app/*.js` and wrap them with jQuery `docready` and `window.load`, and compile `vendor.js` from `scripts/vendor/**/*.js` (jquery-1.9.1.min.js is always included first, you can also delete it if you don't want jQuery)
-2. `gulp copy`: Task to copy `leadpages-template` folder for minifications before zipping it up
-2. `gulp css`: If you are _NOT_ using **sass or less**, this will watch for all changes in `./leadpages-template/css/*.css`. Meaning, edit css directly in that folder.
-3. `gulp html` : `LiveReload` any `html` files if there are changes in `./leadpages-template/*.html`
-3. `gulp images`: Optimize images from `./images` folder then move them to `./leadpages-template/img` folder
-4. `gulp lint`: Run JSHint on all JS files and lint `meta/template.json`
-4. `gulp sass` : Compile & minify SASS files from `/scss/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
-4. `gulp less` : Compile & minify LESS files from `/less/` folder and output to `/leadpages-template/css/style.css`. Also `liveReload` if page is already opened.
-4. `gulp vendorcss`: Put vendor's **CSS** in here. Compile to `leadpages-template/css/vendor.css` from scss/less -> vendor/*.css. If you use vendor less/scss, recommend importing them into template.scss/less which gives you a lot more control over what's being compile first.
-5. `gulp watch` : Watch changes on html, SASS/Less and `LiveReload`, `lint` JS & template.json, as well as `zip` up `leadpages-template.zip` if changes are detected in `/meta/template.json`.
-   * **Note:** The `watch` task watches changes from both the `scss` and `less` folders. Obviously, you don't need both SASS & Less, just delete one of folders. The task will ignore the one that doesn't exist.
-6. `gulp zip` : Runs `copy`, `mincss`, and `uglify` tasks then zip up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
+2. `gulp build` : Compile `functions.js` from `scripts/app/*.js` and wrap them with jQuery `docready` and `window.load`, and compile `vendor.js` from `scripts/vendor/**/*.js` (jquery-1.9.1.min.js is always included first, you can also delete it if you don't want jQuery)
+6. `gulp zip` : Make a copy of `leadpages-template`, then minify css/js before zipping up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
 
 ##Folders Structure Notes
 
@@ -93,13 +98,13 @@ Your Template Folder
 |	  | --- template.less (Put your custom css here or import others in here.)
 | --- node_modules (Added to .gitignore and DO NOT REMOVE)
 | --- package.json (DO NOT REMOVE)
-| --- scripts/
+| --- scripts/ (If you prefer NOT to organize your JS files here. Delete it.)
 |	  | --- app/ (JS in here will output to `leadpages-template/js/functions.js`)
 |	  |	    | --- something.js
 |     | --- vendor/ (JS in here will output to `leadpages-template/js/vendor.js`)
 |     |     | --- jquery.1.9.1.min.js (And other 3rd party scripts. jQuery will always include first)
-| --- scripts-footer.js (Do not remove! Use for wrapping `function.js`)
-| --- scripts-header.js (Do not remove! Use for wrapping `function.js` and you can add `global` variables on top of this file)
+| 	  | --- scripts-footer.js (Do not remove! Use for wrapping `function.js`)
+|	  | --- scripts-header.js (Do not remove! Use for wrapping `function.js` and you can add `global` variables on top of this file)
 | --- scss/ (You can delete this if you prefer LESS or Yeoman will clean this up for you)
 | 	  | --- _settings.colors.scss (Base colors: font colors, background etc...)
 |	  | --- _settings.global.scss (variables for fonts etc...)
@@ -107,10 +112,6 @@ Your Template Folder
 |	  | 	| --- css3.scss (Mixins examples)
 |	  | --- template.scss (Put your custom css here or import others in here.)
 ````
-
-###Important note on `leadpages-template/css/style.css`
-
-If you have a `style.css` in `leadpages-template/css` already, you might want to rename it to something else because if you use `gulp sass` or `gulp less` this file **will be overwritten**!
 
 ##Questions? Issues? Comments?
 
