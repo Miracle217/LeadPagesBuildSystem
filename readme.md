@@ -64,8 +64,8 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 2. `gulp start` : `connect`, `open` (the default browser), `watch`
 	* If your default browser doesn't launch automatically. Point your browser to `http://localhost:8080`
 3. `gulp build` :
- 	* Compile `functions.js` from `scripts/app/*.js` if `.scripts` folder exists and wrap them with jQuery `docready` and `window.load`
- 	* Compile `vendor.js` from `scripts/vendor/**/*.js` if `.scripts` folder exists. jquery-1.9.1.min.js is always included first, you can also delete it if you don't want jQuery
+ 	* combine `functions.js` from `scripts/app/*.js` if `.scripts` folder exists and wrap them with jQuery `docready` and `window.load`
+ 	* combine `vendor.js` from `scripts/vendor/**/*.js` if `.scripts` folder exists. jquery-1.9.1.min.js is always included first, you can also delete it if you don't want jQuery
 4. `gulp zip` : Make a copy of `leadpages-template`, then minify css/js before zipping up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
 
 ##Folders Structure Notes
@@ -74,8 +74,8 @@ To give you a better idea how to work this build system, please refer below for 
 
 * You would edit `index.html` directly inside `./leadpages-template/` folder
 * If you are *not* using **less or sass**, you would edit `style.css` directly inside the `./leadpages-template` folder
-* If you don't want to compile JS into a single file or `scripts` folder doesn't exist, you would edit `functions.js` or your desired JS files directly.
-* SASS, LESS, and JS have their respective folders and see below for more explanations if you answered 'y' to the Yeoman prompts.
+* If you don't want to combine JS into a single file or `scripts` folder doesn't exist, you would edit `functions.js` or your desired JS files directly.
+* SASS, LESS, and JS have their respective folders and see below for more explanations.
 * _All_ css/js within `/leadpages-template/` files will be minify regardless of the above options before zipping.
 
 ````

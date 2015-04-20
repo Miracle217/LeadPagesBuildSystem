@@ -5,7 +5,8 @@ var gulpif = require('gulp-if');
 var paths = {
 	templateFiles: './leadpages-template/**/*',
 	htmlFiles: './leadpages-template/*.html',
-	cssFiles: './leadpages-template/css/*.css'
+	cssFiles: './leadpages-template/css/*.css',
+	jsFiles: './leadpages-template/js/*.js'
 };
 
 gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload. ', function () {
@@ -14,6 +15,8 @@ gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload
   	gulp.watch([paths.cssFiles], ['css']);
 
   	gulp.watch([paths.templateFiles], ['build']);
+
+  	gulp.watch([paths.jsFiles], ['watchJS'])
 
 	//Runs copy, mincss & uglify
 	gulp.watch([paths.templateFiles], ['zip']);

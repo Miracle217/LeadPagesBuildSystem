@@ -1,5 +1,4 @@
 var gulp = require('gulp-help')(require('gulp'));
-var connect = require('gulp-connect');
 var concat = require('gulp-concat');
 var handleErrors = require('../util/handleErrors');
 var logger = require('gulp-logger');
@@ -26,8 +25,7 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 		)
 		.pipe(gulpif(fs.existsSync('./scripts'), concat('vendor.js'))
     		.on('error', handleErrors)
-		.pipe(gulp.dest(destination))
-		.pipe(connect.reload());
+		.pipe(gulp.dest(destination));
 
 	gulp.src(['./scripts/scripts-header.js','./scripts/app/**/*.js','./scripts/scripts-footer.js'])
 		.pipe(
@@ -43,6 +41,5 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 		)
 		.pipe(gulpif(fs.existsSync('./scripts/'), concat('functions.js'))
     		.on('error', handleErrors)
-		.pipe(gulp.dest('./leadpages-template/js'))
-		.pipe(connect.reload());
+		.pipe(gulp.dest('./leadpages-template/js'));
 });

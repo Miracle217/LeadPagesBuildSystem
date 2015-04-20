@@ -8,8 +8,15 @@ var paths = {
 	imageFiles: './leadpages-template/img/*'
 };
 
-gulp.task('build', ['images', 'less', 'sass', 'lint', 'concat'] function(){
+gulp.task('build', function(){
 
 	console.log('Running `build` task...');
+	gulp.watch([paths.imageFiles], ['images']);
+
+	gulp.watch([paths.lessFiles], ['less']);
+	gulp.watch([paths.sassFiles], ['sass']);
+
+	gulp.watch([paths.scriptFiles], ['lint']);
+	gulp.watch([paths.scriptFiles], ['concat']);
 
 });
