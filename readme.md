@@ -74,7 +74,7 @@ To give you a better idea how to work this build system, please refer below for 
 
 * You would edit `index.html` directly inside `./leadpages-template/` folder
 * If you are *not* using **less or sass**, you would edit `style.css` directly inside the `./leadpages-template` folder
-* If you don't want to combine JS into a single file or `scripts` folder doesn't exist, you would edit `functions.js` or your desired JS files directly.
+* If you don't want to combine JS into a single file (as functions.js / vendor.js) or `scripts` folder doesn't exist, you would edit `functions.js` or your desired JS files directly.
 * SASS, LESS, and JS have their respective folders and see below for more explanations.
 * _All_ css/js within `/leadpages-template/` files will be minify regardless of the above options before zipping.
 
