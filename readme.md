@@ -24,6 +24,7 @@ If you are starting fresh, try our [yeoman generator](https://github.com/LeadPag
  * Or download a [zip file here](https://github.com/LeadPages/LeadPagesBuildSystem/archive/master.zip) and unzip to **outside** of `leadpages-template` folder
 3. In the terminal, run `./install`
 4. Type `gulp start` in the terminal to start watching the files
+  * If your default browser doesn't launch automatically. Point your browser to `http://localhost:8080`
 5. Done!
 
 ### Existing Template *with* Git
@@ -37,6 +38,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 4. `cd ..` Even after the folders were deleted, Bash script can only executes in the current directory so it can't `cd` up one level.
 5. `npm install`
 6. Type `gulp start` in the terminal to start coding
+  * If your default browser doesn't launch automatically. Point your browser to `http://localhost:8080`
 7. Done!
 
 
@@ -44,6 +46,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 
 1. `gulp` or `gulp help` : Show available gulp tasks
 2. `gulp start` : `connect`, `open` (the default browser), `watch`
+	* If your default browser doesn't launch automatically. Point your browser to `http://localhost:8080`
 3. `gulp build` : This task will compile sass/less/css/js and output to the `./leadpages-template` folder
 4. `gulp zip` : Runs `copy`, `mincss`, and `uglify` tasks then zip up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
 
