@@ -5,7 +5,6 @@ var logger = require('gulp-logger');
 var yargs = require('yargs').argv;
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
-var fs = require('fs');
 
 var destination = './leadpages-template/js';
 
@@ -23,8 +22,6 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 				showChange: true
 			})
 		)
-		.pipe(gulpif(fs.existsSync('./scripts'), concat('vendor.js'))
-    		.on('error', handleErrors)
 		.pipe(gulp.dest(destination));
 
 	gulp.src(['./scripts/scripts-header.js','./scripts/app/**/*.js','./scripts/scripts-footer.js'])
@@ -39,7 +36,5 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 				showChange: true
 			})
 		)
-		.pipe(gulpif(fs.existsSync('./scripts/'), concat('functions.js'))
-    		.on('error', handleErrors)
 		.pipe(gulp.dest('./leadpages-template/js'));
 });
