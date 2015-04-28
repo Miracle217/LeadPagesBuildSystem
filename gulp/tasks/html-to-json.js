@@ -93,11 +93,11 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
                         elementGroup.type = elementIdRegex[1];
 
                         //Grab element's name to use with variable name below for Dynamics
-                        elementIdText = toTitleCase(elementIdRegex[3].replace(/\W/g, ' '));
+                        elementIdText = elementIdRegex[3];
 
                         //Assign the last part as name if no data-lead-name is found
                         if(elementGroup.name === ''){
-                            elementGroup.name = elementIdText;
+                            elementGroup.name = toTitleCase(elementIdRegex[3].replace(/\W/g, ' '));;
                         }
 
                     } else {
