@@ -26,6 +26,11 @@ var checkDuplicatesID = function(elements) {
     return els;
 };
 
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 var validDataTypes = ["image", "image-link", "link", "text", "container", "dynamic", "background-image", "video", "countdown", "embed", "facebook-button", "facebook-comments", "twitter-button", "google-button"];
 
 
@@ -88,7 +93,7 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
                         elementGroup.type = elementIdRegex[1];
 
                         //Grab element's name to use with variable name below for Dynamics
-                        elementIdText = elementIdRegex[3];
+                        elementIdText = toTitleCase(elementIdRegex[3].replace(/\W/g, ' '));
 
                         //Assign the last part as name if no data-lead-name is found
                         if(elementGroup.name === ''){
@@ -199,7 +204,7 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
                     console.log(
                         chalk.bold.green('NOTICE: ')+
                         chalk.blue.bold(rowsMissingNames.length+isAre+' data-lead-name! ')+
-                        chalk.white('To show more legible names in the builder, please add ')+
+                        chalk.white('To customize the names shown in the builder, please add ')+
                         chalk.white.inverse('data-lead-name')+
                         chalk.white(' to these ')+
                         chalk.yellow('data-lead-id ')+
