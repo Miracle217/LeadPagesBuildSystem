@@ -5,14 +5,21 @@ var jeditor = require('gulp-json-editor');
 var chalk = require('chalk');
 var readJSONSync = require('read-json-sync');
 var writeJson = require('write-json');
+var notifier = require('node-notifier');
 
 var paths = {
     htmlFiles : ['./leadpages-template/*.html'],
     jsonFile : './leadpages-template/meta/template.json',
-    dest : './leadpages-template/meta'
+    backup : './backup/meta',
+    dest: './leadpages-template/meta'
 };
 
-var checkDuplicatesID = function(elements) {
+/**
+ * Compare the object.id then return an array of the duplicates
+ * @param  {array} elements Array of objects
+ * @return {array}          Get the ID's of the objects
+ */
+var findDuplicatesID = function(elements) {
     var els = [];
     elements.map(function(element, index, arr){
         return element.id;
@@ -26,10 +33,11 @@ var checkDuplicatesID = function(elements) {
     return els;
 };
 
-function toTitleCase(str)
-{
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
+var toTitleCase = function(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+};
 
 var validDataTypes = ["image", "image-link", "link", "text", "container", "dynamic", "background-image", "video", "countdown", "embed", "facebook-button", "facebook-comments", "twitter-button", "google-button"];
 
@@ -42,16 +50,15 @@ var isValidDataType = function(str) {
 gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.json elements', function () {
 
     //a template object to build the elements and variables
-    var templateJson = {
+    var writeObj = {
         elements: [],
         variables: {}
     };
 
-    //Objects group to be push to the templateJson object above
+    //Objects group to be push to the writeObj object above
     var elementGroup = null;
 
-    var that = this;
-        rowsMissingNames = [],
+    var rowsMissingNames = [],
         rowsMissingDataType = [],
         rowsWithInvalidTypes = [],
         foundInvalidTypes = [];
@@ -77,6 +84,11 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
                         rowsMissingNames.push(elementId);
                     }
 
+                    //Look for custom leadpages data
+                    if(!!_this.data('lead-data')){
+                        elementGroup.data = _this.data('lead-data');
+                    }
+
                     //Look for data-lead-type
                     if(!!_this.data('lead-type')){
 
@@ -97,7 +109,7 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
 
                         //Assign the last part as name if no data-lead-name is found
                         if(elementGroup.name === ''){
-                            elementGroup.name = toTitleCase(elementIdRegex[3].replace(/\W/g, ' '));;
+                            elementGroup.name = toTitleCase(elementIdRegex[3].replace(/\W/g, ' '));
                         }
 
                     } else {
@@ -120,51 +132,26 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
 
                         elementGroup.data["variables"] = [variableName];
 
-                        templateJson.variables[variableName] = {};
-                        templateJson.variables[variableName].variable = variableName;
-                        templateJson.variables[variableName].default = "";
-                        templateJson.variables[variableName].name = "Instructions on how to use this";
+                        writeObj.variables[variableName] = {};
+                        writeObj.variables[variableName].variable = variableName;
+                        writeObj.variables[variableName].default = "";
+                        writeObj.variables[variableName].name = "Instructions on how to use this";
 
                     }
-                    templateJson.elements.push(elementGroup);
+
+                    writeObj.elements.push(elementGroup);
 
                 }); //$.each
 
                 //Make sure cheerio is finished writing
                 done();
 
-                //Read template.json
-                var writeObj = readJSONSync(paths.jsonFile);
-
-                //Empty out the elements and variables objects first
-                writeObj.elements = [];
-                writeObj.variables = {};
-
-
-                writeJson(paths.jsonFile, writeObj, function(err) {
-                    if (err) console.log(err);
-                });
-
-                //Write to template.json
-                gulp.src(paths.jsonFile)
-                    .pipe(
-                        jeditor({
-                            "elements": templateJson.elements,
-                            "variables": templateJson.variables
-                        },
-                        {
-                            'indent_char': '\t',
-                            'indent_size': 1,
-                        })
-                    )
-                    .pipe(gulp.dest(paths.dest));
-
                 //Find duplicate data-lead-id's
-                var dups = checkDuplicatesID(templateJson.elements);
+                var dups = findDuplicatesID(writeObj.elements);
                 if(dups.length > 0){
                     console.log(
-                        chalk.bold.yellow('IMPORTANT! ')+
-                        chalk.bold.red('DUPLICATE data-lead-id found for: ')+
+                        chalk.bold.yellow('ERROR! ')+
+                        chalk.bold.red('DUPLICATE data-lead-id found: ')+
                         chalk.white(dups.join(', '))
                     );
                 }
@@ -173,7 +160,7 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
                 if(rowsMissingDataType.length > 0){
                     console.log(
                         chalk.bold.yellow('WARNING! ')+
-                        chalk.bold.red(rowsMissingDataType.length+' MISSING DATA TYPE FOUND! ')+
+                        chalk.bold.red(rowsMissingDataType.length+' MISSING DATA TYPE! ')+
                         chalk.white('No Data Type defined in ')+
                         chalk.white.inverse('data-lead-type')+chalk.white(' OR ')+
                         chalk.white.inverse('data-lead-id')+
@@ -214,6 +201,46 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
 
                     );
                 }
+
+                //Write to template.json only if important errors are cleared
+                if(dups.length === 0 && rowsMissingDataType.length === 0 && rowsWithInvalidTypes.length === 0){
+
+                    //TODO: Make a backup first, then diff
+
+
+                    //Read template.json
+                    var templateJSON = readJSONSync(paths.jsonFile);
+
+                    //Empty out the elements and variables objects first
+                    templateJSON.elements = [];
+                    templateJSON.variables = {};
+
+                    writeJson(paths.jsonFile, templateJSON, function(err) {
+                        if (err) console.log(err);
+                    });
+
+                    gulp.src(paths.jsonFile)
+                        .pipe(
+                            jeditor({
+                                "elements": writeObj.elements,
+                                "variables": writeObj.variables
+                            },
+                            {
+                                'indent_char': '\t',
+                                'indent_size': 1,
+                            })
+                        )
+                        .pipe(gulp.dest(paths.dest));
+                } else {
+                    notifier
+                        .notify({
+                            title: "ERROR",
+                            message: 'Please check your console for more info!',
+                            sound: 'Submarine',
+                            wait: true
+                        });
+                }
+
 
             })//Cheerio
         ) //Pipe
