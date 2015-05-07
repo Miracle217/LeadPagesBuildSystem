@@ -1,13 +1,22 @@
 var gulp = require('gulp');
-//var connect = require('gulp-connect');
-var browsersync = require('browser-sync');
-var browsersyncConnect = require('connect-browser-syn');
+var connect = require('gulp-connect');
+var watch = require('gulp-watch');
 
 var path = {
-	src: './leadpages-template/**/*'
+	root: './leadpages-template/',
+	html: this.root+'index.html',
+	css: this.root+'css/*.css',
+	js: this.root+'js/*.js',
+	all: this.root+'**/*'
 };
 
-gulp.task('reload', 'Reload files for changes', function(){
-	gulp.src(path.src)
+connect.server({
+	root: 'leadpages-template',
+	livereload: true
+});
+
+gulp.task('reload', 'Watch for css updates and reload if no sass or less', function(){
+	gulp.src(path.all)
+		.pipe(watch(path.index))
 		.pipe(connect.reload());
 });

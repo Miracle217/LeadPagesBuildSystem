@@ -2,6 +2,7 @@ var gulp = require('gulp-help')(require('gulp'));
 var newer = require('gulp-newer');
 var imagemin = require('gulp-imagemin');
 var handleErrors = require('../util/handleErrors');
+var debug = require('gulp-debug');
 
 var imgSrc = './images/**/*';
 var imgDest = './leadpages-template/img';

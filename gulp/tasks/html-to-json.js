@@ -84,13 +84,13 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
                         rowsMissingNames.push(elementId);
                     }
 
-                    //Look for custom leadpages data
-                    if(!!_this.data('lead-data')){
+                    //Look for extra custom data
+                    if(!!_this.data('lead-data')) {
                         elementGroup.data = _this.data('lead-data');
                     }
 
                     //Look for data-lead-type
-                    if(!!_this.data('lead-type')){
+                    if(!!_this.data('lead-type')) {
 
                         elementGroup.type = _this.data('lead-type');
 

@@ -1,5 +1,6 @@
-var gulp = require('gulp-help')(require('gulp'));
+var gulp = require('gulp');
 var yargs = require('yargs').argv;
+var watch = require('gulp-watch');
 
 var paths = {
 	templateFiles: './leadpages-template/**/*',
@@ -8,11 +9,4 @@ var paths = {
 	jsFiles: './leadpages-template/js/*.js'
 };
 
-gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload. ', function () {
-
-  	gulp.watch([paths.htmlFiles], ['html']);
-
-	//Runs copy, mincss & uglify - TODO: Make sure to test this.
-	gulp.watch([paths.templateFiles], ['build', 'reload', 'zip']);
-
-});
+gulp.task('watch',  ['build', 'reload', 'zip']);

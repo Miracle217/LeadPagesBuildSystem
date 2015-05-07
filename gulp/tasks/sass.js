@@ -11,5 +11,4 @@ gulp.task('sass', 'Watch changes in the `scss` folder and compile to `leadpages-
 		.pipe(concat('style.css'))
     		.on('error', handleErrors)
 		.pipe(gulp.dest('./leadpages-template/css'))
-		.pipe(connect.reload());
 });
