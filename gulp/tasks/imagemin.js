@@ -4,15 +4,17 @@ var imagemin = require('gulp-imagemin');
 var handleErrors = require('../util/handleErrors');
 var debug = require('gulp-debug');
 
-var imgSrc = './images/**/*';
-var imgDest = './leadpages-template/img';
+var paths {
+	imgSrc: './images/**/*';
+	imgDest: './leadpages-template/img'
+};
 
 // Minify any new images
 gulp.task('images', 'Optimize images', function() {
 
   // Add the newer pipe to pass through newer images only
-  return gulp.src(imgSrc)
-      .pipe(newer(imgDest))
+  return gulp.src(paths.imgSrc)
+      .pipe(newer(paths.imgDest))
       .pipe(
 			debug({
 				before: 'Optimizing images..',
@@ -23,5 +25,5 @@ gulp.task('images', 'Optimize images', function() {
 		)
       .pipe(imagemin())
       	.on('error', handleErrors)
-      .pipe(gulp.dest(imgDest));
+      .pipe(gulp.dest(paths.imgDest));
 });
