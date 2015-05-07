@@ -4,7 +4,7 @@ var notifier = require('node-notifier');
 
 var path = {
 	index: './leadpages-template/index.html',
-	dest: './build/dist/leadpages-template/'
+	dest: './build/leadpages-template/'
 };
 
 gulp.task('cleanDataAttributes', 'Clean up data-lead-* before zipping', function(){
