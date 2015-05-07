@@ -10,7 +10,6 @@ var notifier = require('node-notifier');
 var paths = {
     htmlFiles : ['./leadpages-template/*.html'],
     jsonFile : './leadpages-template/meta/template.json',
-    backup : './backup/meta',
     dest: './leadpages-template/meta'
 };
 
@@ -84,13 +83,13 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
                         rowsMissingNames.push(elementId);
                     }
 
-                    //Look for extra custom data
-                    if(!!_this.data('lead-data')) {
+                    //Look for custom leadpages data
+                    if(!!_this.data('lead-data')){
                         elementGroup.data = _this.data('lead-data');
                     }
 
                     //Look for data-lead-type
-                    if(!!_this.data('lead-type')) {
+                    if(!!_this.data('lead-type')){
 
                         elementGroup.type = _this.data('lead-type');
 
