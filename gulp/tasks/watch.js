@@ -1,24 +1,62 @@
-var gulp = require('gulp-help')(require('gulp'));
+var gulp = require('gulp');
 var yargs = require('yargs').argv;
-var gulpif = require('gulp-if');
+var watch = require('gulp-watch');
+var argv = require('yargs').argv;
+var fs = require('fs');
+var debug = require('gulp-debug');
+var connect = require('gulp-connect');
 
 var paths = {
-	templateFiles: './leadpages-template/**/*',
-	htmlFiles: './leadpages-template/*.html',
-	cssFiles: './leadpages-template/css/*.css',
-	jsFiles: './leadpages-template/js/*.js'
+	all: './leadpages-template/**/*',
+	html: './leadpages-template/*.html',
+	js: './leadpages-template/js/*.js',
+	css: './leadpages-template/css/*.css',
+	sass: './scss/**/*.scss',
+	less: './less/**/*.less',
+	scripts: './scripts/app/*.js'
 };
 
-gulp.task('watch', 'Watch for html/scss/less changes and refresh with LiveReload. ', function () {
+var refresh = function(glob){
+	gulp.src(glob)
+		.pipe(debug({title: 'Reloading: '}))
+		.pipe(watch(glob))
+		.pipe(connect.reload());
+};
 
-  	gulp.watch([paths.htmlFiles], ['html']);
-  	gulp.watch([paths.cssFiles], ['css']);
+gulp.task('watch',  ['connect'], function(){
+	if(argv.htmltojson){
+		watch(paths.html, function(){
+			gulp.start('htmltojson');
+		});
+	}
 
-  	gulp.watch([paths.templateFiles], ['build']);
+	watch(paths.sass, function(){
+		gulp.start('sass');
 
-  	gulp.watch([paths.jsFiles], ['watchJS'])
+		refresh(paths.css);
+	});
 
-	//Runs copy, mincss & uglify
-	gulp.watch([paths.templateFiles], ['zip']);
+	watch(paths.less, function(){
+		gulp.start('less');
+
+		refresh(paths.css);
+	});
+
+	watch(paths.scripts, function(){
+		gulp.start('concat');
+		refresh(paths.js);
+	});
+
+	watch(paths.js, function(){
+		gulp.start('lint');
+	});
+
+	watch(paths.html, function(){
+		refresh(paths.html);
+	});
+
+	watch(paths.all, function(){
+		gulp.start('zip');
+	});
 
 });
