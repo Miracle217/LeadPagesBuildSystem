@@ -61,12 +61,28 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 ##Available Gulp Tasks
 
 1. `gulp` or `gulp help` : Show available gulp tasks
-2. `gulp start` : `connect`, `open` (the default browser), `watch`
-	* If your default browser doesn't launch automatically. Point your browser to `http://localhost:8080`
+2. `gulp start [arg]` : `open` (the default browser) and `watch`
+	* (_If your default browser doesn't launch automatically. Point your browser to `http://localhost:8080`_)
+	* **Available Arguments**:
+	 	* `--htmltojson`: Watch for `index.html` for changes and build `template.json` if valid `data-lead-id` are found (See **htmltojson task** below)
 3. `gulp build` :
  	* combine `functions.js` from `scripts/app/*.js` if `.scripts` folder exists and wrap them with jQuery `docready` and `window.load`
  	* combine `vendor.js` from `scripts/vendor/**/*.js` if `.scripts` folder exists. jquery-1.9.1.min.js is always included first, you can also delete it if you don't want jQuery
-4. `gulp zip` : Make a copy of `leadpages-template`, then minify css/js before zipping up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
+4. `gulp watch` : Watch changes in files and livereload them. If pass in `--htmltojson`, it will also compile template.json. **Please read below for _important_ notes**
+5. `gulp zip` : Make a copy of `leadpages-template`, then minify css/js before zipping up the `leadpages-template.zip` folder for easy upload! <br>(**Note:** you would still need to manually update the `notes` and `version` in `template.json`.)
+6. `gulp htmltojson` : **WARNING:** _DO NOT_ run this task to an existing `template.json`. It _will_ overwrites existing customized template.json!!
+	* This task is meant for if you are starting a brand new template, it will generating the basic `template.json` for you to save you some time from typing them manually.
+	* **How it works:** In your `index.html`, you can define for example a text element:
+		* **Method 1**: You can define everything in `data-lead-id` using the `--` flag
+			* **Markup**: `<h1 data-lead-id="text--main-header">My Header</h1>`
+			* **Output to template.json**: `{ "id": "text--main-header", "name": "Main Header", "type": "text"}`
+		* **Method 2**: If you prefer cleaner data attributes or regenerate your template.json (`data-lead-name` & `data-lead-type` are optionals)
+			* **Markup**: `<h1 data-lead-id="main-header" data-lead-type="text" data-lead-name="My Main Header">My Header</h1>`
+			* **Output**: `{ "id": "main-header", "name": "My Main Header", "type": "text"}`
+	* **Element Types** - They are the same as [our docs](http://docs.leadpages.net/#elements). Yes, even for type that has `-`:
+		* `<a href="#" data-lead-id="imagelink--image_link_01"><img src="..." /></a>`
+		* `{ "id": "image-link--image_link_01", "name": "Image Link 01", "type": "image-link"}`
+	* Even works with [Dynamic Element](http://docs.leadpages.net/#dynamic-elements)! It will generate the `variables` objects for you. Run it and find out!
 
 ##Folders Structure Notes
 
@@ -123,7 +139,7 @@ Your Template Folder
 
 ##Questions? Issues? Comments?
 
-Please report them using this repo's [Issues Tracker](https://github.com/LeadPages/LeadPagesBuildSystem/issues).
+Please report them using this repo's [Issues Tracker](https://github.com/LeadPages/LeadPagesBuildSystem/issues) or head over to our [Dev Forum](http://forum.leadpages.net) for questions.
 
 ##Contribute
 
@@ -136,7 +152,7 @@ Don't have all the stuff you want? You can always fork a branch!
 
 ##Important notes for the `yeoman` branch
 
-Please note that this branch is meant for using with the [Yeoman generator](https://github.com/LeadPages/LeadPagesYeoman) that MAKE SURE you create a **local yeoman** branch and do a Pull Request *with this branch ONLY*. The difference is that the `yeoman` branch *has* the `leadpages-template` folder and minor readme details like this one.
+Please note that this branch is meant for using with the [Yeoman generator](https://github.com/LeadPages/LeadPagesYeoman) that MAKE SURE you create a **local yeoman** branch and do a Pull Request *with this branch ONLY*. The difference is that the `yeoman` branch *has* the `leadpages-template` folder and the `master` branch has the `install` bash script.
 
 If you are pulling changes from `master` from other branches (such as updating the gulp tasks), *make sure* you **keep** the `leadpages-template` folder otherwise you'd break the `./install` script on `master`. How? `git co [commit before your merge hash] leadpages-template` to bring it back.
 

@@ -5,7 +5,7 @@ var debug = require('gulp-debug');
 var handleErrors = require('../util/handleErrors');
 
 /**
- * NOTE: Excluding vendor.css from minifying. Weird stuff could happen
+ * NOTE: Excluding vendor.css from minifying. Weird stuff could happen if concat then min
  */
 var paths = {
 	cssFiles: ['./leadpages-template/css/*.css', '!./leadpages-template/css/vendor.css'],
