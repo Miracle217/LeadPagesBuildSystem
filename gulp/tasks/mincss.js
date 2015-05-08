@@ -9,7 +9,7 @@ var handleErrors = require('../util/handleErrors');
  */
 var paths = {
 	cssFiles: ['./leadpages-template/css/*.css', '!./leadpages-template/css/vendor.css'],
-	dest: './build/dist/leadpages-template/css'
+	dest: './build/leadpages-template/css'
 };
 
 gulp.task('mincss', 'Minify CSS', function(){
