@@ -2,15 +2,11 @@ var gulp = require('gulp-help')(require('gulp'));
 var concat = require('gulp-concat');
 var handleErrors = require('../util/handleErrors');
 var logger = require('gulp-logger');
-var yargs = require('yargs').argv;
-var gulpif = require('gulp-if');
-var uglify = require('gulp-uglify');
-
 var destination = './leadpages-template/js';
 
 gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and functions.js', function () {
 
-	gulp.src(['./scripts/vendor/jquery-1.9.1.min.js','./scripts/vendor/**/*.js'])
+	gulp.src(['./scripts/vendor/jquery*.js','./scripts/vendor/**/!(jquery-*).js'])
 		.pipe(
 			logger({
 				before: 'Compiling vendor.js',
@@ -22,10 +18,8 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 				showChange: true
 			})
 		)
-	        .pipe(concat('vendor.js'))
-	        	.on('error', handleErrors)
-	        .pipe(gulp.dest(destination)
-        );
+		.pipe(concat('vendor.js'))
+		.pipe(gulp.dest(destination));
 
 	gulp.src(['./scripts/scripts-header.js','./scripts/app/**/*.js','./scripts/scripts-footer.js'])
 		.pipe(
@@ -35,12 +29,10 @@ gulp.task('concat', 'Concatenate js files from `scripts` into vendor.js and func
 				basename: 'functions',
 				extname: '.js',
 				display: 'name',
-				dest: './leadpages-template/js',
+				dest: destination,
 				showChange: true
 			})
 		)
 		.pipe(concat('functions.js'))
-    			.on('error', handleErrors)
-		.pipe(gulp.dest(destination)
-	);
+		.pipe(gulp.dest(destination));
 });

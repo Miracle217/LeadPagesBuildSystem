@@ -12,5 +12,4 @@ gulp.task('less', 'Watch changes in the `less` folder and compile to `leadpages-
 		.pipe(concat('style.css'))
     		.on('error', handleErrors)
 		.pipe(gulp.dest('./leadpages-template/css'))
-		.pipe(connect.reload());
 });
