@@ -1,14 +1,19 @@
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var zip = require('gulp-zip');
+var readJSONSync = require('read-json-sync');
 
 var fs = require('fs');
 var exec = require('child_process').exec;
-var tjson = require('../../leadpages-template/meta/template.json');
 
-var paths = ['./build/dist/leadpages-template/**/*'];
+var paths = {
+	copiedFiles: ['./build/leadpages-template/**/*'],
+	templateJson: './leadpages-template/meta/template.json'
+};
 
-gulp.task('zip',['copy', 'uglify', 'mincss'], function () {
+var tjson = readJSONSync(paths.templateJson);
+
+gulp.task('zip',['copy', 'cleanDataAttributes', 'uglify', 'mincss'], function () {
 	var fileName = 'leadpages-template ' + tjson.version + '.zip';
 	var leadPagesTemplateName = './leadpages-template.zip';
 
@@ -40,7 +45,7 @@ gulp.task('zip',['copy', 'uglify', 'mincss'], function () {
 		});
 	}
 
-	return gulp.src(paths, {base: "./build/dist/"})
+	return gulp.src(paths.copiedFiles, {base: "./build/"})
 		.pipe(plumber())
 		.pipe(zip(leadPagesTemplateName))
 		.pipe(gulp.dest('./'));

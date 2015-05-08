@@ -204,9 +204,6 @@ gulp.task('htmltojson', 'Convert data-lead-id or data-lead-type into template.js
                 //Write to template.json only if important errors are cleared
                 if(dups.length === 0 && rowsMissingDataType.length === 0 && rowsWithInvalidTypes.length === 0){
 
-                    //TODO: Make a backup first, then diff
-
-
                     //Read template.json
                     var templateJSON = readJSONSync(paths.jsonFile);
 

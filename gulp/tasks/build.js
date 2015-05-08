@@ -2,6 +2,7 @@ var gulp = require('gulp-help')(require('gulp'));
 var debug = require('gulp-debug');
 var argv = require('yargs').argv;
 var fs = require('fs');
+var watch = require('gulp-watch');
 
 var paths = {
 	scriptFiles: './scripts/**/*.js',
@@ -14,7 +15,9 @@ var paths = {
 	cssFiles: './leadpages-template/css/*.css'
 };
 
-gulp.task('build', 'Run `images`, `less` or `sass`, `lint`, `contact`, and `htmltojson` tasks', function(){
+gulp.task('build', 'Run `images`, `less` or `sass`, `lint`, `contact`, and `htmltojson` tasks if --htmltojson flag is passed', function(){
+
+	console.log('Running `build` task...');
 
 	gulp.start('images');
 

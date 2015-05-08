@@ -4,8 +4,8 @@ var imagemin = require('gulp-imagemin');
 var handleErrors = require('../util/handleErrors');
 var debug = require('gulp-debug');
 
-var paths {
-	imgSrc: './images/**/*';
+var paths = {
+	imgSrc: './images/**/*',
 	imgDest: './leadpages-template/img'
 };
 

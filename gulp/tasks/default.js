@@ -1,9 +1,12 @@
 var gulp = require('gulp');
 var argv = require('yargs').argv;
+var watch = require('gulp-watch');
 
-gulp.task('start', 'Connect, open, watch tasks. Pass in --htmltojson to also run `htmltojson` task', ['open', 'watch'], function(){
+gulp.task('start', 'Connect, open, watch tasks. Option: --htmltojson', ['open', 'watch'], function(){
 
 	if(argv.htmltojson){
-		gulp.watch(['./leadpages-template/*.html'], ['htmltojson']);
+		watch(['./leadpages-template/index.html'], function(){
+			gulp.start('htmltojson');
+		});
 	}
 });
