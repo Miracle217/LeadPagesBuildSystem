@@ -8,7 +8,7 @@ var handleErrors = require('../util/handleErrors');
  */
 var paths = {
 	js: ['./leadpages-template/js/*.js', '!./leadpages-template/js/vendor.js', '!./leadpages-template/js/html5shiv.js'],
-	dest: './build/dist/leadpages-template/js'
+	dest: './build/leadpages-template/js'
 };
 
 gulp.task('uglify', 'Uglify JS files', function(doneMinJS) {
