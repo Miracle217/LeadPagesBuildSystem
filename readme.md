@@ -80,7 +80,7 @@ Why have a separate set of instructions? This is one way to make sure we don't o
 			* **Markup**: `<h1 data-lead-id="main-header" data-lead-type="text" data-lead-name="My Main Header">My Header</h1>`
 			* **Output**: `{ "id": "main-header", "name": "My Main Header", "type": "text"}`
 	* **Element Types** - They are the same as [our docs](http://docs.leadpages.net/#elements). Yes, even for type that has `-`:
-		* `<a href="#" data-lead-id="imagelink--image_link_01"><img src="..." /></a>`
+		* `<a href="#" data-lead-id="image-link--image_link_01"><img src="..." /></a>`
 		* `{ "id": "image-link--image_link_01", "name": "Image Link 01", "type": "image-link"}`
 	* Even works with [Dynamic Element](http://docs.leadpages.net/#dynamic-elements)! It will generate the `variables` objects for you. Run it and find out!
 
